@@ -1,0 +1,36 @@
+.jumbotron{
+    margin-top: 20px;
+    height: 500px;
+    background: url('../../assets/636644906357508373-bbg-arb-Brownsburg-cam1.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.home{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 20px 5vw 50px 5vw;
+    text-align: left;
+}
+.homeCard{
+    margin: 10px;
+    width: 30%;
+    min-width: 300px;
+}
+.homeCard p {
+    color: grey;
+    margin: 0;
+    word-wrap: break-word;
+    text-indent: 20px;
+}
+.trusteeInfo p{
+    color: grey;
+    margin: 0;
+}
+.card{
+    margin-top: 20px;
+    padding: 10px;
+} 
+.homeCardTitle{
+    font-family: 'Roboto', sans-serif;
+}

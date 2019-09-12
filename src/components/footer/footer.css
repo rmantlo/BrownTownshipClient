@@ -1,0 +1,6 @@
+.myFooter{
+    border-top: 3px solid rgb(182, 182, 182);
+    background: rgba(245, 245, 245, 0.801);
+    padding-top: 15px;
+    height: 60px;
+}

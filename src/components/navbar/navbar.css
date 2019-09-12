@@ -1,0 +1,14 @@
+.navbarDiv{
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    z-index: 3;
+}
+.navbarTopper{
+    height: 25px;
+    background-color: rgb(185, 0, 0);
+}
+.navbar{
+    background-color: rgb(185, 0, 0, .8);
+}

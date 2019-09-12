@@ -1,0 +1,12 @@
+.adminLogin {
+    border-radius: 5px;
+    margin: 100px auto;
+    width: 40vw;
+    min-width: 330px;
+}
+
+.adminLogin input {
+    width: 80%;
+    min-width:260px;
+    margin: auto auto;
+}

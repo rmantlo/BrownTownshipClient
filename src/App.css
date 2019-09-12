@@ -1,5 +1,10 @@
+body {
+  height: 100%;
+}
+
 .App {
   text-align: center;
+  margin-top: 20px;
 }
 
 .App-logo {
@@ -29,5 +34,62 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Vollkorn', serif;
+}
+
+p, li, input {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.myContainer {
+  background: url('./assets/farmfieldsabove.jpg') no-repeat;
+  padding: 70px 5vw 100px 5vw;
+  background-position: center;
+  background-size: cover;
+}
+
+.secondaryContainer {
+  background: rgb(255, 255, 255);
+  margin-top: 20px;
+  padding: 25px 10px;
+  border-radius: 5px;
+}
+
+.myModal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+}
+
+.modalContent {
+  width: 40vw;
+  min-width: 320px;
+  margin: 30px auto;
+  background: white;
+  box-shadow: 1px 1px 5px 1px rgb(56, 56, 56);
+  padding: 20px 10px;
+  border-radius: 5px;
+}
+
+.btnSpacing {
+  margin-right: 10px;
+}
+
+.divider {
+  border-right: 1px solid grey;
+  margin: 50px 0;
+  width: 0;
+}
+
+@media only screen and (max-width: 860px) {
+  .divider {
+    display: none;
   }
 }

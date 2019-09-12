@@ -1,0 +1,73 @@
+.admin {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.adminEvents {
+    width: 45%;
+    min-width: 300px;
+}
+
+.adminCard {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.adminBudgets {
+    width: 40vw;
+    min-width: 300px;
+    border: 1px solid rgb(0, 0, 0, .125);
+    border-radius: 5px;
+    padding-bottom: 10px;
+    margin: 5px;
+}
+
+.adminBudgets p {
+    margin-bottom: 0;
+}
+
+.adminBudgets .iframe {
+    height: 400px;
+    margin-bottom: 10px;
+}
+
+.adminBudgets button {
+    margin: 10px 5px 0 0;
+}
+
+.adminSettings {
+    margin-top: 50px;
+    height: 200px;
+    margin-bottom: 30vh;
+}
+.adminOptions{
+    padding-top: 10px;
+}
+.adminOptions ul, .adminOptions li{
+    list-style-type: none;
+    padding: 0;
+}
+.adminOptions button{
+    border: none;
+    background-color: transparent;
+    margin: 5px 1px;
+    color: blue;
+}
+.adminOptions button:hover{
+    text-decoration-line: underline;
+}
+.adminDivider {
+    border-right: 1px solid grey;
+    margin: 10px 0;
+    width: 0;
+}
+
+@media only screen and (max-width: 860px) {
+    .adminDivider {
+        display: none;
+    }
+}

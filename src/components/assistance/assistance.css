@@ -1,0 +1,22 @@
+.assistance {
+    margin: 30px 5vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    text-align: left;
+}
+@media only screen and (max-width: 800px){
+    .assistance{
+        flex-direction: column
+    }
+}
+.assistInfo{
+    width: 50vw;
+    min-width: 300px;
+    word-wrap: break-word;
+}
+.assistInfo p, .assistInfo li {
+    text-indent: 20px;
+    color: grey;
+}
