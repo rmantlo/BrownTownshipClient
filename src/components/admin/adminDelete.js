@@ -19,7 +19,9 @@ export default class AdminDelete extends React.Component {
             })
                 .then(info => info.json())
                 .then(info => {
-                    this.setState({ userList: info })
+                    if (info != null) {
+                        this.setState({ userList: info })
+                    }
                 })
                 .catch(err => console.log(err));
         }
@@ -83,7 +85,8 @@ export default class AdminDelete extends React.Component {
                                                     <td><Button color='danger' onClick={e => { e.preventDefault(); this.extraToggle(user) }}>Delete</Button></td>
                                                 </tr>
                                             )
-                                        }) : <tr>
+                                        })
+                                        : <tr>
                                             <td>No Users Found</td>
                                             <td></td>
                                         </tr>
