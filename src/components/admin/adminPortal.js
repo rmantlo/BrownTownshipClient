@@ -1,4 +1,5 @@
 import React from 'react';
+import APIURL from '../../helpers/environment';
 import './adminportal.css';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Button, Card, CardBody, CardText } from 'reactstrap';
 import classnames from 'classnames';
@@ -41,7 +42,7 @@ export default class AdminPortal extends React.Component {
         }
     }
     fetchBudgetEvents = () => {
-        fetch(`http://localhost:3001/admin/allbudgetfiles`, {
+        fetch(`${APIURL}/admin/allbudgetfiles`, {
             method: 'GET',
             headers: {
                 "Authorization": localStorage.getItem('token'),
@@ -53,11 +54,9 @@ export default class AdminPortal extends React.Component {
                 this.setState({
                     budgets: data,
                 });
-                console.log(this.state);
-
             })
             .catch(err => console.log(err));
-        fetch(`http://localhost:3001/admin/alleventposts`, {
+        fetch(`${APIURL}/admin/alleventposts`, {
             method: 'GET',
             headers: {
                 "Authorization": localStorage.getItem('token'),
@@ -69,12 +68,11 @@ export default class AdminPortal extends React.Component {
                 this.setState({
                     events: data,
                 });
-                console.log(data);
             })
             .catch(err => console.log(err));
     }
     fetchUserInfo = () => {
-        fetch(`http://localhost:3001/admin/userinfo`, {
+        fetch(`${APIURL}/admin/userinfo`, {
             method: "GET",
             headers: {
                 "Authorization": localStorage.getItem('token'),
@@ -264,7 +262,7 @@ export default class AdminPortal extends React.Component {
                                                 </div>
                                             )
                                         }))
-                                        : <div>
+                                        : <div className='budgetFiller'>
                                             <h2>No budgets found</h2>
                                         </div>
                                     }
@@ -310,7 +308,7 @@ export default class AdminPortal extends React.Component {
                 {(this.state.eventCreateModal) ?
                     <EventCreate exit={this.userToggle}></EventCreate> : null
                 }
-                {(this.state.createBudgetModal && this.state.token) ?
+                {(this.state.createBudgetModal) ?
                     <BudgetCreate exit={this.userToggle} ></BudgetCreate> : null
                 }
             </div>

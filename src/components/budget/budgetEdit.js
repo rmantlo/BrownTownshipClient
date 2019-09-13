@@ -1,4 +1,5 @@
 import React from 'react';
+import APIURL from '../../helpers/environment';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 export default class BudgetEdit extends React.Component {
@@ -12,7 +13,7 @@ export default class BudgetEdit extends React.Component {
     handleSubmit = (e) => {
         // console.log(this.state);
         // console.log(e.target.id)
-        fetch(`http://localhost:3001/admin/updatebudgetfile/${this.state.id}`, {
+        fetch(`${APIURL}/admin/updatebudgetfile/${this.state.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

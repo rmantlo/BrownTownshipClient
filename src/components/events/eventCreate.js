@@ -1,4 +1,5 @@
 import React from 'react';
+import APIURL from '../../helpers/environment';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import 'rc-time-picker/assets/index.css';
 import TimePicker from 'rc-time-picker';
@@ -16,11 +17,9 @@ export default class EventCreate extends React.Component {
     }
     handleTime = (e) => {
         this.setState({ time: e.format(this.format) });
-        // console.log(this.state)
     }
     handleSubmit = (e) => {
-        // console.log(this.state);
-        fetch(`http://localhost:3001/admin/createevent`, {
+        fetch(`${APIURL}/admin/createevent`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -34,7 +33,7 @@ export default class EventCreate extends React.Component {
         return (
             <div className='myModal'>
                 <div className='modalContent'>
-                    <Button id="exitBtn" name='eventCreateModal' onClick={(e) => { e.preventDefault(); this.props.exit(e); }} ><strong>X</strong></Button>
+                    <Button id="exitBtn" name='eventCreateModal' onClick={(e) => {this.props.exit(e); }} >X</Button>
                     <div>
                         <h3>Create Post</h3>
                         <Form onSubmit={this.handleSubmit}>

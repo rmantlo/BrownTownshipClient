@@ -1,13 +1,12 @@
 import React from 'react';
 import './home.css';
-import {
-    Card, CardText, Container, Jumbotron
-} from 'reactstrap';
+import APIURL from '../../helpers/environment';
+import {Card, CardText, Container, Jumbotron} from 'reactstrap';
 
 export default class Home extends React.Component {
     state = {}
     componentDidMount() {
-        fetch(`http://localhost:3001/posts/nextmeeting`, {
+        fetch(`${APIURL}/posts/nextmeeting`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -48,8 +47,8 @@ export default class Home extends React.Component {
                     <div className="homeCard">
                         <h2>About Us</h2>
                         <hr />
-                        <p>Welcome to Brown Township - One of twelve in Hendricks County. FACEBOOK LINK. </p>
-                        <p>Our current Township Trustee, Nathan Mantlo, took office on ENTER DATE. A Township Trustee is an elected official for the local government. The Trustee acts as an administration for a township, and works with other board members in adopting annual budgets, managing finance and township contracts. A Trustee, in common with most other state officials, serves a term of four years.</p>
+                        <p>Welcome to Brown Township - One of twelve in Hendricks County. <span><a href='https://www.facebook.com/pages/category/Government-Organization/Brown-Township-Hendricks-County-Indiana-144733892707732/' target='_blank' rel="noopener noreferrer" >Check out our Facebook!</a></span> </p>
+                        <p>Our current Township Trustee, Nathan Mantlo, took office on January 1st, 2019. A Township Trustee is an elected official for the local government. The Trustee acts as an administration for a township, and works with other board members in adopting annual budgets, managing finance and township contracts. A Trustee, in common with most other state officials, serves a term of four years.</p>
                     </div>
                     <div className="homeCard">
                         <h2>Site</h2>

@@ -1,4 +1,5 @@
 import React from 'react';
+import APIURL from '../../helpers/environment';
 import './budget.css';
 
 export default class BudgetYear extends React.Component {
@@ -7,7 +8,7 @@ export default class BudgetYear extends React.Component {
     }
     componentDidMount() {
         this.setState({ token: localStorage.getItem('token') })
-        fetch(`http://localhost:3001/budget/year/${this.props.year}`, {
+        fetch(`${APIURL}/budget/year/${this.props.year}`, {
             method: 'GET',
             headers: {
                 "Content-Type": 'application/json'
@@ -15,7 +16,6 @@ export default class BudgetYear extends React.Component {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 if (data != null) {
                     this.setState({
                         data: data

@@ -1,35 +1,41 @@
-.events{
-    margin: 30px 0;
+.events {
+    margin: 30px auto;
 }
-.boardInfo{
-    width: 30vw;
-    min-width: 350px;
-    float: right;
-}
-.myCard{
-    width: 50vw;
-    min-width: 350px;
+
+.myCard {
+    width: 50vw auto;
+    min-width: 300px;
     text-align: left;
 }
-.myCard button{
+
+.noEvents {
+    text-align: center;
+    margin: 15vh auto 39vh auto;
+}
+
+.myCard button {
     margin-left: 10px;
 }
-#eventType{
+
+#eventType {
     margin: 0;
     font-size: 8pt;
     color: grey;
 }
-.myCard h2{
+
+.myCard h2 {
     margin-bottom: 5px;
     font-family: 'Roboto', sans-serif;
     font-size: 24pt;
 }
-.eventDateTime{
+
+.eventDateTime {
     margin: 0;
     font-size: 8pt;
     color: grey;
 }
-.message{
+
+.message {
     word-wrap: break-word;
     overflow: auto;
     border-top: 0.5px solid rgb(185, 185, 185);
@@ -40,29 +46,33 @@
     text-indent: 20px;
 }
 
-@media only screen and (max-width: 875px){
-    .boardInfo{
+@media only screen and (max-width: 875px) {
+    .boardInfo {
         display: none
     }
-    .myCard{
+    .myCard {
         margin-left: auto;
         margin-right: auto;
     }
 }
-#exitBtn{
+
+#exitBtn {
     float: right;
     margin-top: -10px;
 }
-#eventLocation{
+
+#eventLocation {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
-#time{
-    height:calc(1.5em + .75rem + 2px);
+
+#time {
+    height: calc(1.5em + .75rem + 2px);
     padding: .375rem .75rem;
     font-size: 1rem;
 }
-#eventLocation .form-group{
-    margin:0;
+
+#eventLocation .form-group {
+    margin: 0;
 }

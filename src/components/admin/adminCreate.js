@@ -1,4 +1,5 @@
 import React from 'react';
+import APIURL from '../../helpers/environment';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 
 export default class AdminCreate extends React.Component {
@@ -8,8 +9,8 @@ export default class AdminCreate extends React.Component {
         this.setState({ [event.target.name]: event.target.value })
     }
     handleSubmit = (e) => {
-        if(this.handleValidation()){
-            fetch(`http://localhost:3001/admin/createuser`, {
+        if (this.handleValidation()) {
+            fetch(`${APIURL}/admin/createuser`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -17,11 +18,19 @@ export default class AdminCreate extends React.Component {
                 },
                 body: JSON.stringify(this.state)
             })
-            .then(info => info.json())
-            .then(info => alert('User created!'))
-            .catch(err => console.log(err))
+                .then(info => info.json())
+                .then(info => {
+                    if (info.error != null) {
+                        e.preventDefault();
+                        alert(info.error)
+                    }
+                    else {
+                        alert('User created!')
+                    }
+                })
+                .catch(err => console.log(err))
         }
-        else{
+        else {
             e.preventDefault();
         }
     }
@@ -34,7 +43,7 @@ export default class AdminCreate extends React.Component {
             alert('Please enter a password.');
             return false;
         }
-        if (!this.state.confirmPassword || this.state.confirmPassword !== this.state.password){
+        if (!this.state.confirmPassword || this.state.confirmPassword !== this.state.password) {
             alert('Passwords dont match.');
             return false;
         }

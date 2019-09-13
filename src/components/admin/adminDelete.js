@@ -1,4 +1,5 @@
 import React from 'react';
+import APIURL from '../../helpers/environment';
 import { Button, Table } from 'reactstrap';
 
 export default class AdminDelete extends React.Component {
@@ -9,7 +10,7 @@ export default class AdminDelete extends React.Component {
 
     componentDidMount() {
         if (this.state.user.id === 1) {
-            fetch(`http://localhost:3001/admin/getalluserinfo`, {
+            fetch(`${APIURL}/admin/getalluserinfo`, {
                 method: 'GET',
                 headers: {
                     "Authorization": localStorage.getItem('token'),
@@ -18,9 +19,7 @@ export default class AdminDelete extends React.Component {
             })
                 .then(info => info.json())
                 .then(info => {
-                    console.log(info);
                     this.setState({ userList: info })
-                    console.log(this.state)
                 })
                 .catch(err => console.log(err));
         }
@@ -34,7 +33,7 @@ export default class AdminDelete extends React.Component {
     deleteUser = (e) => {
         console.log(e.target.name);
         if (this.state.user.id === 1) {
-            fetch(`http://localhost:3001/admin/deleteotheruser/${e.target.name}`, {
+            fetch(`${APIURL}/admin/deleteotheruser/${e.target.name}`, {
                 method: "DELETE",
                 headers: {
                     "Authorization": localStorage.getItem('token'),
@@ -45,7 +44,7 @@ export default class AdminDelete extends React.Component {
                 .catch(err => console.log(err))
         }
         else {
-            fetch(`http://localhost:3001/admin/deleteuser`, {
+            fetch(`${APIURL}/admin/deleteuser`, {
                 method: "DELETE",
                 headers: {
                     "Authorization": localStorage.getItem('token'),
@@ -54,15 +53,7 @@ export default class AdminDelete extends React.Component {
             })
                 .then(info => {
                     alert('User account deleted');
-                    fetch('http://localhost:3001/admin/logout', {
-                        method: "DELETE",
-                        headers: {
-                            "Authorization": localStorage.getItem('token'),
-                            "Content-Type": 'application/json'
-                        }
-                    })
-                        .then(info => localStorage.clear())
-                        .catch(err => console.log(err));
+                    localStorage.clear();
                     window.location.reload();
                 })
                 .catch(err => console.log(err))

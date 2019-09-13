@@ -1,4 +1,5 @@
 import React from 'react';
+import APIURL from '../../helpers/environment';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import 'rc-time-picker/assets/index.css';
 import TimePicker from 'rc-time-picker';
@@ -25,7 +26,7 @@ export default class EventEdit extends React.Component {
     handleSubmit = (e) => {
         // console.log(this.state);
         // console.log(e.target.id)
-        fetch(`http://localhost:3001/admin/editevent/${e.target.id}`, {
+        fetch(`${APIURL}/admin/editevent/${e.target.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

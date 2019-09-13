@@ -1,4 +1,5 @@
 import React from 'react';
+import APIURL from '../../helpers/environment';
 import { Form, FormGroup, Input, Label, Button } from 'reactstrap';
 
 export default class AdminChangePass extends React.Component {
@@ -11,7 +12,7 @@ export default class AdminChangePass extends React.Component {
     handleSubmit = (e) => {
         //e.preventDefault();
         if (this.handleValidation()) {
-            fetch(`http://localhost:3001/admin/updatepassword`, {
+            fetch(`${APIURL}/admin/updatepassword`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -21,7 +22,7 @@ export default class AdminChangePass extends React.Component {
             })
                 .then(info => info.json())
                 .then(info => {
-                    if(info === 'old password not correct') {alert('Old password incorrect!')}
+                    if (info.error != null) { e.preventDefault(); alert(info.error) }
                     else alert('User password updated!')
                 })
                 .catch(err => console.log(err))

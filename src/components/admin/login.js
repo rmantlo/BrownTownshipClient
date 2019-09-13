@@ -1,4 +1,5 @@
 import React from 'react';
+import APIURL from '../../helpers/environment';
 import './login.css';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import AdminPortal from './adminPortal';
@@ -22,7 +23,7 @@ export default class Login extends React.Component {
         if (!this.state.username || !this.state.password) {
             this.handleValidation();
         } else {
-            fetch(`http://localhost:3001/user/login`, {
+            fetch(`${APIURL}/user/login`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": 'application/json'

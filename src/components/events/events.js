@@ -1,5 +1,6 @@
 import React from 'react';
 import './events.css';
+import APIURL from '../../helpers/environment';
 import EventEdit from './eventEdit';
 import { Button, Card, CardText, CardBody } from 'reactstrap';
 
@@ -11,7 +12,7 @@ export default class Events extends React.Component {
     }
     componentDidMount() {
         this.setState({ token: localStorage.getItem('token') })
-        fetch(`http://localhost:3001/posts/getupcomingevents`, {
+        fetch(`${APIURL}/posts/getupcomingevents`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -33,7 +34,7 @@ export default class Events extends React.Component {
         })
     }
     deleteFile = (e) => {
-        fetch(`http://localhost/3001/admin/deletepost/${e.target.id}`, {
+        fetch(`${APIURL}/admin/deletepost/${e.target.id}`, {
             method: 'DELETE',
             headers: {
                 "Authorization": localStorage.getItem('token'),
@@ -43,10 +44,7 @@ export default class Events extends React.Component {
     }
     render() {
         return (
-            <div className='events'>
-                <div className='boardInfo secondaryContainer'>
-                    Board member info
-                </div>
+            <div className='events secondaryContainer'>
                 <div className='myDeck'>
                     {(this.state.data.length > 0) ?
                         (this.state.data.map(event => {
@@ -81,8 +79,8 @@ export default class Events extends React.Component {
                                     }
                                 </Card>)
                         }))
-                        : <div className='myCard secondaryContainer'>
-                            <h2>No events coming up!</h2>
+                        : <div className='myCard noEvents'>
+                            <h3>No events coming up!</h3>
                         </div>
                     }
                 </div>

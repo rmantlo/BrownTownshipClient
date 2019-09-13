@@ -11,7 +11,7 @@ export default class Contact extends React.Component {
                     <h2>Brown Township Trustee</h2>
                     <h4>Nathan Mantlo</h4>
                     <img src={pic} alt='dad and dixie' />
-                    <p>About the Trustee and Message Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah </p>
+                    <p>Having lived in Brownsburg for over 15 years, Nathan decided he wanted to give back to our community. He took office on January 1st, 2019.</p>
                 </div>
                 <div className='divider'></div>
                 <div className='contactForm'>

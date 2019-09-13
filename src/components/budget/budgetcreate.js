@@ -1,4 +1,5 @@
 import React from 'react';
+import APIURL from '../../helpers/environment';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 export default class BudgetCreate extends React.Component {
@@ -25,7 +26,7 @@ export default class BudgetCreate extends React.Component {
             console.log(reader.result);
             result = reader.result;
             console.log(result);
-            fetch(`http://localhost:3001/admin/uploadbudgetfile`, {
+            fetch(`${APIURL}/admin/uploadbudgetfile`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -50,7 +51,7 @@ export default class BudgetCreate extends React.Component {
         return (
             <div className='myModal'>
                 <div className='modalContent'>
-                    <Button id='exitBtn' name='createBudgetModal' onClick={(e) => { e.preventDefault(); this.props.exit(e); }} ><strong>X</strong></Button>
+                    <Button id='exitBtn' name='createBudgetModal' onClick={(e) => {this.props.exit(e); }} >X</Button>
                     <br />
                     <Form onSubmit={this.handleCreateSubmit}>
                         <FormGroup>

@@ -1,6 +1,7 @@
 import React from 'react';
+import APIURL from '../../helpers/environment';
 import './budget.css';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col} from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import BudgetYear from './budgetByYear';
 
@@ -16,7 +17,7 @@ export default class Budget extends React.Component {
 
     componentDidMount() {
         this.setState({ token: localStorage.getItem('token') })
-        fetch(`http://localhost:3001/budget/currentbudget`, {
+        fetch(`${APIURL}/budget/currentbudget`, {
             method: 'GET',
             headers: {
                 "Content-Type": 'application/json'
@@ -24,9 +25,11 @@ export default class Budget extends React.Component {
         })
             .then(response => response.json())
             .then(data => {
-                this.setState({
-                    data: data
-                });
+                if (data != null) {
+                    this.setState({
+                        data: data
+                    });
+                }
             })
             .catch(err => console.log(err));
     }
@@ -51,18 +54,24 @@ export default class Budget extends React.Component {
                             <NavLink
                                 className={classnames({ active: this.state.activeTab === '2' })}
                                 onClick={() => { this.toggle('2'); }}>
-                                2018 Budget</NavLink>
+                                2019 Budget</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink
                                 className={classnames({ active: this.state.activeTab === '3' })}
                                 onClick={() => { this.toggle('3'); }}>
-                                2017 Budget</NavLink>
+                                2018 Budget</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink
                                 className={classnames({ active: this.state.activeTab === '4' })}
                                 onClick={() => { this.toggle('4'); }}>
+                                2017 Budget</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink
+                                className={classnames({ active: this.state.activeTab === '5' })}
+                                onClick={() => { this.toggle('5'); }}>
                                 2016 Budget</NavLink>
                         </NavItem>
                     </Nav>
@@ -80,7 +89,7 @@ export default class Budget extends React.Component {
                                                     <p><a download={this.state.data.fileName} href={this.state.data.fileBinary}>Download Instead</a></p>
                                                 </object>
                                                 <p><strong>Document Description:</strong> {this.state.data.documentDesc}</p>
-                                                <p><strong>Date File Uploaded: </strong>{this.state.data.updatedAt.substring(0,10)}</p>
+                                                <p><strong>Date File Uploaded: </strong>{this.state.data.updatedAt.substring(0, 10)}</p>
                                             </div>
                                             : <div className="budgetFiller">No Current file</div>
                                         }
@@ -92,7 +101,7 @@ export default class Budget extends React.Component {
                             <Row>
                                 <Col sm="12">
                                     <div className='budgetFile'>
-                                        <BudgetYear year={2018}></BudgetYear>
+                                        <BudgetYear year={2019}></BudgetYear>
                                     </div>
                                 </Col>
                             </Row>
@@ -101,12 +110,21 @@ export default class Budget extends React.Component {
                             <Row>
                                 <Col sm="12">
                                     <div className='budgetFile'>
-                                        <BudgetYear year={2017}></BudgetYear>
+                                        <BudgetYear year={2018}></BudgetYear>
                                     </div>
                                 </Col>
                             </Row>
                         </TabPane>
                         <TabPane tabId="4">
+                            <Row>
+                                <Col sm="12">
+                                    <div className='budgetFile'>
+                                        <BudgetYear year={2017}></BudgetYear>
+                                    </div>
+                                </Col>
+                            </Row>
+                        </TabPane>
+                        <TabPane tabId="5">
                             <Row>
                                 <Col sm="12">
                                     <div className='budgetFile'>
