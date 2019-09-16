@@ -1,5 +1,6 @@
 import React from 'react';
 import './assistance.css';
+import TA1Form from  '../../assets/files/Township Assistance Application I.pdf';
 
 export default class Assistance extends React.Component {
 
@@ -9,6 +10,8 @@ export default class Assistance extends React.Component {
                 <div className='assistInfo'>
                     <h2>Township Assistance</h2>
                     <p>Brown Township offers temporary assistance to qualifying individuals, in an attempt to help our citizens get back on their own two feet. Individuals and families who wish to apply can find more instructions on Eligibily and next steps below. Those who do not meet the requirements, the Township will attempt to refer those to other programs and counsels available. Township Assistance is a program that allows those in need of temporary relief the opportunity to apply for assistance for food, clothing, shelter, and other basic necessities. The state requires the completion of an application and thorough investigation, and then assists in the most economical means available.</p>
+                    <h3>Blessing Boxes</h3>
+                    <p>Brownsburg has a few different locations for Blessing Boxes. The downloads list has and attachment listing the locations. These boxes SOMETHING SOMETHING</p>
                     <h4>Eligibility</h4>
                     <p>To be eligible for assistance, applicants must be:</p>
                     <ul>
@@ -18,9 +21,8 @@ export default class Assistance extends React.Component {
                     <h4>First Steps</h4>
                     <p>list of things to do</p>
                     <ul>
-                        <li>Completely fill out the required documents.</li>
+                        <li>Completely fill out the required Township Assistance TA-1 Form. Download from the list, or at the Trustee office.</li>
                         <li>Schedule a meeting with the Trustee at the Trustee Office.</li>
-                        <li>Complete written application at the Trustee's Office.</li>
                         <li>Please bring:</li>
                         <ul>
                             <li>Photo ID</li>
@@ -32,9 +34,14 @@ export default class Assistance extends React.Component {
                     <div>
                         <h5>Required Documents</h5>
                         <ul>
-                            <li>downloads</li>
-                            <li>downloads</li>
-                            <li>downloads</li>
+                            <li><a href={TA1Form} alt='Township Assistance TA-1 Form'>Township assistance TA-1 Form</a></li>
+                        </ul>
+                        <h5>Other Documents</h5>
+                        <ul>
+                            <li><a href={} alt="Poverty Guidelines 2019" >Poverty Guidelines 2019</a></li>
+                            <li><a href={} alt="List Of Important Documents">List Of Important Documents</a></li>
+                            <li><a href={} alt="Hendricks County Trustee Information 2019">Hendricks County Trustee Infomation 2019</a></li>
+                            <li><a href={} alt="Blessing Box Location List">Blessing Box Locations in Brownsburg</a></li>
                         </ul>
                     </div>
                     <div className='trusteeInfo'>
