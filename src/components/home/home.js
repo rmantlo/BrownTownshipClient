@@ -47,7 +47,7 @@ export default class Home extends React.Component {
                     <div className="homeCard">
                         <h2>About Us</h2>
                         <hr />
-                        <p>Welcome to Brown Township - One of twelve in Hendricks County. <span><a href='https://www.facebook.com/pages/category/Government-Organization/Brown-Township-Hendricks-County-Indiana-144733892707732/' target='_blank' rel="noopener noreferrer" >Check out our Facebook!</a></span> </p>
+                        <p>Welcome to Brown Township - One of twelve in Hendricks County.</p>
                         <p>Our current Township Trustee, Nathan Mantlo, took office on January 1st, 2019. A Township Trustee is an elected official for the local government. The Trustee acts as an administration for a township, and works with other board members in adopting annual budgets, managing finance and township contracts. A Trustee, in common with most other state officials, serves a term of four years.</p>
                     </div>
                     <div className="homeCard">

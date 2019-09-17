@@ -13,7 +13,7 @@
 }
 .assistInfo{
     width: 50vw;
-    min-width: 300px;
+    min-width: 280px;
     word-wrap: break-word;
 }
 .assistInfo p, .assistInfo li {
