@@ -7,7 +7,7 @@ export default class Footer extends React.Component {
         return (
             <div>
                 <div className='myFooter'>
-                    <p>&copy; Mantlo {new Date().toLocaleDateString()}</p>
+                    <p>&copy; Rebekah Anna Designs {new Date().toLocaleDateString()}</p>
                 </div>
             </div>
         )

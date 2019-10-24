@@ -14,12 +14,10 @@ export default class Assistance extends React.Component {
                 <div className='assistInfo'>
                     <h2>Township Assistance</h2>
                     <p>Brown Township offers temporary assistance to qualifying individuals, in an attempt to help our citizens get back on their own two feet. Individuals and families who wish to apply can find more instructions on Eligibily and next steps below. Those who do not meet the requirements, the Township will attempt to refer those to other programs and counsels available. Township Assistance is a program that allows those in need of temporary relief the opportunity to apply for assistance for food, clothing, shelter, and other basic necessities. The state requires the completion of an application and thorough investigation, and then assists in the most economical means available.</p>
-                    <h3>Blessing Boxes</h3>
-                    <p>Brownsburg has a few different locations for Blessing Boxes. The downloads list has and attachment listing the locations. These boxes contain various foods and personal care items to help those who need it, with the mission to take what you need and give back when you can.</p>
                     <h4>Eligibility</h4>
                     <p>To be eligible for assistance, applicants must be:</p>
                     <ul>
-                        <li>a resident of Brown Township.</li>
+                        <li>A resident of Brown Township.</li>
                         <li>In dire need of assistance for basic living necessities.</li>
                     </ul>
                     <h4>First Steps</h4>
@@ -33,8 +31,10 @@ export default class Assistance extends React.Component {
                             <li>Social Security Cards</li>
                             <li>Consult the List Of Important Documents List in the downloads section.</li>
                         </ul>
-
                     </ul>
+                    <br />
+                    <h3>Blessing Boxes</h3>
+                    <p>Brownsburg has a few different locations for Blessing Boxes. The downloads list has and attachment listing the locations. These boxes contain various foods and personal care items to help those who need it, with the mission to take what you need and give back when you can.</p>
                 </div>
                 <div>
                     <div>

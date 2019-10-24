@@ -8,10 +8,19 @@ export default class Contact extends React.Component {
         return (
             <section className='contact secondaryContainer'>
                 <div className='contactImg'>
-                    <h2>Brown Township Trustee</h2>
+                    <h2>Brown Township Members</h2>
+                    <h3>Trustee</h3>
                     <h4>Nathan Mantlo</h4>
-                    <img src={pic} alt='dad and dixie' />
+                    {/* <img src={pic} alt='dad and dixie' /> */}
                     <p>Having lived in Brownsburg for over 15 years, Nathan decided he wanted to give back to our community. He took office on January 1st, 2019.</p>
+                    <br />
+                    <h3>Board Members</h3>
+                    <h4>Member Name</h4>
+                    <p>Member about?</p>
+                    <h4>Member Name</h4>
+                    <p>Member about?</p>
+                    <h4>Member Name</h4>
+                    <p>Member about?</p>
                 </div>
                 <div className='divider'></div>
                 <div className='contactForm'>

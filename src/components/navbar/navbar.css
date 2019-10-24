@@ -12,3 +12,6 @@
 .navbar{
     background-color: rgb(185, 0, 0, .8);
 }
+.nav-link{
+    color: white !important;
+}
