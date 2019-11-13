@@ -71,8 +71,9 @@ p, li, input {
 .modalContent {
   width: 40vw;
   min-width: 320px;
-  /* height: 500px; */
-  position: absolute;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: fixed;
   left: 50%;
   top:50%;
   transform: translate(-50%, -50%) !important;
