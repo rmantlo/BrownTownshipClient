@@ -44,6 +44,7 @@
     font-size: 14pt;
     color: black !important;
     text-indent: 20px;
+    max-height: 300px;
 }
 
 @media only screen and (max-width: 875px) {

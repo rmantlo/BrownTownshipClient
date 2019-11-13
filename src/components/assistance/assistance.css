@@ -14,6 +14,10 @@
 .assistInfo p, .assistInfo li {
     text-indent: 20px;
     color: grey;
+    word-wrap: break-word;
+}
+.assistInfo p a, .assistInfo li a{
+    word-wrap: break-word;
 }
 @media only screen and (max-width: 800px){
     .assistance{

@@ -12,6 +12,6 @@
 .navbar{
     background-color: rgb(185, 0, 0, .8);
 }
-.nav-link{
+.navbar-dark .navbar-nav .nav-link{
     color: white !important;
 }

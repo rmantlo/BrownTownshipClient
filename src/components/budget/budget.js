@@ -48,7 +48,7 @@ export default class Budget extends React.Component {
                         <NavItem>
                             <NavLink
                                 className={classnames({ active: this.state.activeTab === '1' })}
-                                onClick={() => { this.toggle('1'); }} >Current Budget</NavLink>
+                                onClick={() => { this.toggle('1'); }} >2020 Budget</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink
@@ -80,7 +80,7 @@ export default class Budget extends React.Component {
                             <Row>
                                 <Col sm="12">
                                     <div className='budgetFile'>
-                                        {(this.state.data.fileBinary) ?
+                                        {/* {(this.state.data.fileBinary) ?
                                             <div>
                                                 <h6>{this.state.data.fileYear}</h6>
                                                 <h3>{this.state.data.fileName}</h3>
@@ -92,7 +92,8 @@ export default class Budget extends React.Component {
                                                 <p><strong>Date File Uploaded: </strong>{this.state.data.updatedAt.substring(0, 10)}</p>
                                             </div>
                                             : <div className="budgetFiller">No Current file</div>
-                                        }
+                                        } */}
+                                        <BudgetYear year={2020}></BudgetYear>
                                     </div>
                                 </Col>
                             </Row>
