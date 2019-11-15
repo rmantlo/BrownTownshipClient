@@ -4,12 +4,12 @@ import './adminportal.css';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Button, Card, CardBody, CardText } from 'reactstrap';
 import classnames from 'classnames';
 import EventEdit from '../events/eventEdit';
-import BudgetEdit from '../budget/budgetEdit';
+import DocumentEdit from '../documents/documentEdit';
 import AdminCreate from './adminCreate';
 import AdminDelete from './adminDelete';
 import AdminChangePass from './adminChangePass';
 import EventCreate from '../events/eventCreate';
-import BudgetCreate from '../budget/budgetcreate';
+import DocumentCreate from '../documents/documentCreate';
 
 export default class AdminPortal extends React.Component {
     state = {
@@ -17,7 +17,8 @@ export default class AdminPortal extends React.Component {
         budgets: [],
         events: {
             futureEvents: [],
-            pastEvents: []
+            pastEvents: [],
+            tbdEvents: []
         },
         user: [],
         eventModal: false,
@@ -42,7 +43,7 @@ export default class AdminPortal extends React.Component {
         }
     }
     fetchBudgetEvents = () => {
-        fetch(`${APIURL}/admin/allbudgetfiles`, {
+        fetch(`${APIURL}/budget/alldocuments`, {
             method: 'GET',
             headers: {
                 "Authorization": localStorage.getItem('token'),
@@ -56,7 +57,7 @@ export default class AdminPortal extends React.Component {
                 });
             })
             .catch(err => console.log(err));
-        fetch(`${APIURL}/admin/alleventposts`, {
+        fetch(`${APIURL}/posts/alleventposts`, {
             method: 'GET',
             headers: {
                 "Authorization": localStorage.getItem('token'),
@@ -94,7 +95,7 @@ export default class AdminPortal extends React.Component {
     }
     deleteFile = (e) => {
         //console.log(e.target.name + "  " + e.target.id)
-        fetch(`http://localhost:3001/admin/${e.target.name}/${e.target.id}`, {
+        fetch(`${APIURL}/admin/${e.target.name}/${e.target.id}`, {
             method: 'DELETE',
             headers: {
                 "Authorization": localStorage.getItem('token'),
@@ -126,18 +127,23 @@ export default class AdminPortal extends React.Component {
                     <NavItem>
                         <NavLink
                             className={classnames({ active: this.state.activeTab === '1' })}
-                            onClick={() => { this.toggle('1'); }} >Event/Meeting Posts</NavLink>
+                            onClick={() => { this.toggle('1'); }} >Upcoming Event/Meeting</NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink
                             className={classnames({ active: this.state.activeTab === '2' })}
-                            onClick={() => { this.toggle('2'); }}>
-                            Budgets on File</NavLink>
+                            onClick={() => { this.toggle('2'); }} >Past Event/Meeting</NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink
                             className={classnames({ active: this.state.activeTab === '3' })}
                             onClick={() => { this.toggle('3'); }}>
+                            Documents</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink
+                            className={classnames({ active: this.state.activeTab === '4' })}
+                            onClick={() => { this.toggle('4'); }}>
                             Users</NavLink>
                     </NavItem>
                 </Nav>
@@ -151,6 +157,37 @@ export default class AdminPortal extends React.Component {
                                 <div className='admin'>
                                     <div className='adminEvents'>
                                         <h2>Upcoming Meetings and Events</h2>
+                                        {(this.state.events.tbdEvents.length > 0) ? (this.state.events.tbdEvents.map(event => {
+                                            let time = (event.timeOfEvent.substring(0, 5)).split(':');
+                                            var hours = Number(time[0]);
+                                            var minutes = Number(time[1]);
+                                            var timeValue;
+                                            if (hours > 0 && hours <= 12) {
+                                                timeValue = "" + hours;
+                                            } else if (hours > 12) {
+                                                timeValue = "" + (hours - 12);
+                                            } else if (hours === 0) {
+                                                timeValue = "12";
+                                            }
+                                            timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
+                                            timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
+                                            return (
+                                                <Card className='myCard adminCard' key={event.id}>
+                                                    <CardBody>
+                                                        <p id='eventType'>{event.type}</p>
+                                                        <h2>{(event.title).charAt(0).toUpperCase() + (event.title.toLowerCase()).slice(1)}</h2>
+                                                        <p className='eventDateTime'>{timeValue}, {event.dateOfEvent}</p>
+                                                        <p className='eventDateTime'>Location: {event.streetAddress}, {event.city}, {event.state} {event.zipcode}</p>
+                                                        <CardText className='message' >{event.forumMessage}</CardText>
+                                                    </CardBody>
+                                                    {(this.state.token) ?
+                                                        <div>
+                                                            <Button onClick={e => { e.preventDefault(); this.editEventToggle(event) }}>Edit</Button>
+                                                            <Button color='danger' name="deletepost" id={event.id} onClick={this.deleteFile}>Delete</Button>
+                                                        </div> : null
+                                                    }
+                                                </Card>)
+                                        })) : null}
                                         {(this.state.events.futureEvents.length > 0) ?
                                             (this.state.events.futureEvents.map(event => {
                                                 let time = (event.timeOfEvent.substring(0, 5)).split(':');
@@ -189,7 +226,17 @@ export default class AdminPortal extends React.Component {
                                             </div>
                                         }
                                     </div>
-                                    <div className='divider'></div>
+                                </div>
+                            </Col>
+                        </Row>
+                    </TabPane>
+                    <TabPane tabId="2">
+                        <Row>
+                            <Col sm="12">
+                                {(this.state.token) ?
+                                    <Button className='mainBtn' name='eventCreateModal' onClick={this.userToggle}>Create event or meeting</Button> : null
+                                }
+                                <div className='admin'>
                                     <div className='adminEvents'>
                                         <h2>Past Meetings and Events</h2>
                                         {(this.state.events.pastEvents.length > 0) ?
@@ -234,7 +281,7 @@ export default class AdminPortal extends React.Component {
                             </Col>
                         </Row>
                     </TabPane>
-                    <TabPane tabId="2">
+                    <TabPane tabId="3">
                         <Row>
                             <Col sm="12">
                                 {(this.state.token) ?
@@ -251,7 +298,7 @@ export default class AdminPortal extends React.Component {
                                                         <p>Oops! You don't support PDFs!</p>
                                                         <p><a download={file.fileName} href={file.fileBinary}>Download Instead</a></p>
                                                     </object>
-                                                    <p><strong>Document Description:</strong> {file.documentDesc}</p>
+                                                    <p className="docDescription"><strong>Document Description:</strong> {file.description}</p>
                                                     <p><strong>Date File Uploaded: </strong>{file.updatedAt.substring(0, 10)}</p>
                                                     {(this.state.token) ?
                                                         <div>
@@ -270,7 +317,7 @@ export default class AdminPortal extends React.Component {
                             </Col>
                         </Row>
                     </TabPane>
-                    <TabPane tabId="3">
+                    <TabPane tabId="4">
                         <Row>
                             <Col sm="12">
                                 <div className='admin adminSettings'>
@@ -300,7 +347,7 @@ export default class AdminPortal extends React.Component {
                     <EventEdit data={this.state.eventEdit} exit={this.editEventToggle} /> : null
                 }
                 {(this.state.budgetModal) ?
-                    <BudgetEdit data={this.state.budgetEdit} exit={this.editBudgetToggle} /> : null
+                    <DocumentEdit data={this.state.budgetEdit} exit={this.editBudgetToggle} /> : null
                 }
                 {(this.state.createUserModal) ? <AdminCreate exit={this.userToggle} /> : null}
                 {(this.state.deleteUserModal) ? <AdminDelete data={this.state.user} exit={this.userToggle} /> : null}
@@ -309,7 +356,7 @@ export default class AdminPortal extends React.Component {
                     <EventCreate exit={this.userToggle}></EventCreate> : null
                 }
                 {(this.state.createBudgetModal) ?
-                    <BudgetCreate exit={this.userToggle} ></BudgetCreate> : null
+                    <DocumentCreate exit={this.userToggle} ></DocumentCreate> : null
                 }
             </div>
         )

@@ -29,11 +29,12 @@ export default class EventCreate extends React.Component {
         })
             .then()
     }
+
     render() {
         return (
             <div className='myModal'>
                 <div className='modalContent'>
-                    <Button id="exitBtn" name='eventCreateModal' onClick={(e) => {this.props.exit(e); }} >X</Button>
+                    <Button id="exitBtn" name='eventCreateModal' onClick={(e) => { this.props.exit(e); }} >X</Button>
                     <div>
                         <h3>Create Post</h3>
                         <Form onSubmit={this.handleSubmit}>

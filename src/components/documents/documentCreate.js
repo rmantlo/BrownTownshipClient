@@ -2,10 +2,8 @@ import React from 'react';
 import APIURL from '../../helpers/environment';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
-export default class BudgetCreate extends React.Component {
-    state = {
-        current: true
-    }
+export default class DocumentCreate extends React.Component {
+    state = { }
 
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value })
@@ -22,11 +20,11 @@ export default class BudgetCreate extends React.Component {
         const reader = new FileReader();
         reader.readAsDataURL(blob)
         reader.onloadend = (e) => {
-            //const view = new Int8Array(reader.result);
+            //const view = new UInt8Array(reader.result);
             console.log(reader.result);
             result = reader.result;
             console.log(result);
-            fetch(`${APIURL}/admin/uploadbudgetfile`, {
+            fetch(`${APIURL}/admin/uploaddocument`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -34,11 +32,11 @@ export default class BudgetCreate extends React.Component {
                 },
                 body: JSON.stringify({
                     data: result,
-                    current: this.state.current,
-                    documentDesc: this.state.documentDesc,
                     fileName: this.state.fileName,
+                    documentType: this.state.documentType,
+                    description: this.state.description,
+                    fileDate: this.state.fileDate,
                     fileType: doc.type,
-                    year: this.state.year
                 })
             })
                 .then(response => response.json())
@@ -54,8 +52,18 @@ export default class BudgetCreate extends React.Component {
                     <Button id='exitBtn' name='createBudgetModal' onClick={(e) => {this.props.exit(e); }} >X</Button>
                     <br />
                     <Form onSubmit={this.handleCreateSubmit}>
+                        <FormGroup >
+                            <Label>Select document label:</Label><br/>
+                            <Input type="select" name="documentType" onChange={this.handleChange}>
+                                <option name="documentType" value="Budget">Budget</option>
+                                <option name="documentType" value="Minutes">Minutes</option>
+                                <option name="documentType" value="Resolutions">Resolutions</option>
+                                <option name="documentType" value="Reports">Reports</option>
+                                <option name="documentType" value="Other">Other</option>
+                            </Input>
+                        </FormGroup>
                         <FormGroup>
-                            <Label>Upload new File. If a File of the same year exists, it will be deleted and replaced with the new File.</Label>
+                            <Label>Upload new PDF File: </Label>
                             <Input type='file' name='file' id='upload' onChange={this.handleChange} />
                         </FormGroup>
                         <FormGroup>
@@ -63,17 +71,12 @@ export default class BudgetCreate extends React.Component {
                             <Input type='text' name='fileName' onChange={this.handleChange} />
                         </FormGroup>
                         <FormGroup>
-                            <Label>Document Year:</Label>
-                            <Input type='number' name='year' onChange={this.handleChange} min='1990' />
+                            <Label>Document Date:</Label>
+                            <Input type='date' name='fileDate' onChange={this.handleChange} />
                         </FormGroup>
                         <FormGroup>
                             <Label>Document Description:</Label>
-                            <Input type='textarea' name='documentDesc' onChange={this.handleChange} />
-                        </FormGroup>
-                        <FormGroup >
-                            <Label>Make this document the current document:</Label><br/>
-                            <Input type='radio' name='radio1' defaultChecked onChange={(e) => { this.setState({ current: true }) }} />Yes<br/>
-                            <Input type='radio' name='radio1' onChange={(e) => { this.setState({ current: false }) }} />No
+                            <Input type='textarea' name='description' onChange={this.handleChange} />
                         </FormGroup>
                         <Button className='mainBtn' type='submit'>Add File</Button>
                     </Form>

@@ -1,7 +1,7 @@
 import React from 'react';
 import './contact.css';
 import { Form, FormGroup, Label, Input } from 'reactstrap';
-import pic from '../../assets/dadanddixie.jpg';
+//import pic from '../../assets/dadanddixie.jpg';
 
 export default class Contact extends React.Component {
     render() {

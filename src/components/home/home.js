@@ -6,7 +6,7 @@ import { Card, CardText, Container, Jumbotron } from 'reactstrap';
 export default class Home extends React.Component {
     state = {}
     componentDidMount() {
-        fetch(`${APIURL}/posts/nextmeeting`, {
+        fetch(`${APIURL}/posts/nextevent`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

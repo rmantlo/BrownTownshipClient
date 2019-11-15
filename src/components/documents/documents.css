@@ -1,0 +1,77 @@
+.budgets {
+    margin-top: 30px;
+}
+
+.docContainer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.searchDocs {
+    border-radius: 5px;
+    margin: 0 20px;
+    background: red;
+    width: 200px;
+    height: 400px;
+}
+
+.docAssortment {
+    display: flex;
+    width: 60vw;
+    border: 1px solid grey;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.docSquare {
+    height: 200px;
+    width: 200px;
+    border-radius: 1px;
+    background: rgb(211, 189, 141);
+    padding: 10px;
+    margin: 10px;
+}
+
+.docDescription {
+    max-height: 200px;
+}
+
+.budgetFile {
+    margin: 50px auto;
+}
+
+.budgetFile h3 {
+    margin-bottom: 30px;
+}
+
+.documentModal {
+    width: 90vw;
+    min-width: 320px;
+    max-height: 90vh;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) !important;
+    background: white;
+    box-shadow: 1px 1px 5px 1px rgb(56, 56, 56);
+    padding: 20px 10px;
+    border-radius: 5px;
+}
+
+.documentInner {
+    margin-top: 30px;
+    max-height: 10%;
+    overflow-y: auto;
+}
+
+.iframe {
+    width: 95%;
+    min-width: 300px;
+    max-height: 50%;
+    min-height: 400px;
+    margin-bottom: 20px;
+}
+
+.budgetFiller {
+    height: 300px;
+}

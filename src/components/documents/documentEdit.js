@@ -2,7 +2,7 @@ import React from 'react';
 import APIURL from '../../helpers/environment';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
-export default class BudgetEdit extends React.Component {
+export default class DocumentEdit extends React.Component {
     state = this.props.data
 
     handleChange = (event) => {
@@ -30,26 +30,31 @@ export default class BudgetEdit extends React.Component {
                     <Button id='exitBtn' onClick={(e) => { e.preventDefault(); this.props.exit(e); }} ><strong>X</strong></Button>
                     <br />
                     <Form onSubmit={this.handleSubmit}>
+                        <FormGroup >
+                            <Label>Select document label:</Label><br />
+                            <Input type="select" name="documentType" onChange={this.handleChange}>
+                                <option name="documentType" value="Budget">Budget</option>
+                                <option name="documentType" value="Minutes">Minutes</option>
+                                <option name="documentType" value="Resolutions">Resolutions</option>
+                                <option name="documentType" value="Reports">Reports</option>
+                                <option name="documentType" value="Other">Other</option>
+                            </Input>
+                        </FormGroup>
                         <FormGroup>
-                            <Label>Upload new File. If a File of the same year exists, it will be deleted and replaced with the new File.</Label>
+                            <Label>Upload new PDF File: </Label>
                             <Input type='file' name='file' id='upload' onChange={this.handleChange} />
                         </FormGroup>
                         <FormGroup>
                             <Label>Document Title:</Label>
-                            <Input type='text' name='fileName' value={this.state.fileName} onChange={this.handleChange} />
+                            <Input type='text' name='fileName' onChange={this.handleChange} />
                         </FormGroup>
                         <FormGroup>
-                            <Label>Document Year:</Label>
-                            <Input type='number' name='year' value={this.state.fileYear} onChange={this.handleChange} min='1990' />
+                            <Label>Document Date:</Label>
+                            <Input type='number' name='fileDate' onChange={this.handleChange} min='1990' />
                         </FormGroup>
                         <FormGroup>
                             <Label>Document Description:</Label>
-                            <Input type='textarea' name='documentDesc' value={this.state.documentDesc} onChange={this.handleChange} />
-                        </FormGroup>
-                        <FormGroup >
-                            <Label>Make this document the current document:</Label><br />
-                            <Input type='radio' name='radio1' value="true" onChange={(e) => { this.setState({ current: true }) }} />Yes<br />
-                            <Input type='radio' name='radio1' value='false' onChange={(e) => { this.setState({ current: false }) }} />No
+                            <Input type='textarea' name='description' onChange={this.handleChange} />
                         </FormGroup>
                         <Button className='mainBtn' type='submit'>Add File</Button>
                     </Form>

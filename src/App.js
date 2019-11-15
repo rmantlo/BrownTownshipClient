@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import NavBar from './components/navbar/navbar';
 import Home from './components/home/home';
-import Budget from './components/budget/budget';
+import Documents from './components/documents/documents';
 import Footer from './components/footer/footer';
 import Events from './components/events/events';
 import Login from './components/admin/login';
@@ -31,7 +31,7 @@ class App extends React.Component {
           </Switch>
           <div className='myContainer'>
             <Switch>
-              <Route path='/budgets' exact><Budget></Budget></Route>
+              <Route path='/documents' exact><Documents /></Route>
               <Route path='/eventsandmeetings' exact><Events></Events></Route>
               <Route path='/adminlogin' exact><Login></Login></Route>
               <Route path='/adminportal' exact><AdminPortal></AdminPortal></Route>
@@ -51,7 +51,7 @@ class App extends React.Component {
           </Switch>
           <div className='myContainer'>
             <Switch>
-              <Route path='/budgets' exact><Budget></Budget></Route>
+              <Route path='/documents' exact><Documents /></Route>
               <Route path='/eventsandmeetings' exact><Events></Events></Route>
               <Route path='/contact' exact><Contact></Contact></Route>
               <Route path='/adminlogin' exact><Login></Login></Route>

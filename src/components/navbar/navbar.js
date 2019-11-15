@@ -42,7 +42,7 @@ export default class NavBar extends React.Component {
                                 <NavLink href="/eventsandmeetings">Meetings and Events</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/budgets">Budget</NavLink>
+                                <NavLink href="/documents">Documents</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink href="/contact">Contact Us</NavLink>
