@@ -9,10 +9,6 @@ export default class EventEdit extends React.Component {
     state = this.props.data
     format = 'h:mm a';
     now = moment().hour(parseInt((this.state.timeOfEvent).substring(0, 2))).minute(parseInt((this.state.timeOfEvent).substring(3, 5)));
-    componentDidMount() {
-        console.log(this.props);
-        console.log(this.state);
-    }
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value })
         console.log(event.target.value);
@@ -24,8 +20,6 @@ export default class EventEdit extends React.Component {
         console.log(this.state)
     }
     handleSubmit = (e) => {
-        // console.log(this.state);
-        // console.log(e.target.id)
         fetch(`${APIURL}/admin/editevent/${e.target.id}`, {
             method: 'PUT',
             headers: {

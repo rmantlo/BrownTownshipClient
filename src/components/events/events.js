@@ -158,7 +158,7 @@ export default class Events extends React.Component {
                                                 </Card>)
                                         }))
                                         : <div className='myCard noEvents'>
-                                            <h3>No events coming up!</h3>
+                                            <h3>No events from the past!</h3>
                                         </div>
                                     }
                                 </div>

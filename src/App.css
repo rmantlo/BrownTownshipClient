@@ -60,7 +60,7 @@ p, li, input {
 }
 
 .myModal {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -71,7 +71,7 @@ p, li, input {
 .modalContent {
   width: 40vw;
   min-width: 320px;
-  max-height: 90vh;
+  height: 90vh;
   overflow-y: auto;
   position: fixed;
   left: 50%;

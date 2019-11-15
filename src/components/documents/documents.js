@@ -58,12 +58,12 @@ export default class Documents extends React.Component {
                         <div className="docAssortment">
                             {(this.state.data.length > 0) ? (this.state.data.map(doc => {
                                 return (
-                                    <div className="docSquare" key={doc} onClick={e => { e.preventDefault(); this.documentDetailsToggle(doc) }}>
+                                    <div className="docSquare" key={doc.id} onClick={e => { e.preventDefault(); this.documentDetailsToggle(doc) }}>
                                         <p>{doc.fileDate}</p>
-                                        <h5>{doc.fileName}</h5>
+                                        <h4>{doc.fileName}</h4>
                                     </div>)
                             }))
-                                : <div className="docSquare">Nothing</div>}
+                                : <div><h5>No Documents Uploaded</h5></div>}
                         </div>
                     </div>
                 </div >

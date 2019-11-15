@@ -4,17 +4,17 @@ import './adminportal.css';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Button, Card, CardBody, CardText } from 'reactstrap';
 import classnames from 'classnames';
 import EventEdit from '../events/eventEdit';
-import DocumentEdit from '../documents/documentEdit';
 import AdminCreate from './adminCreate';
 import AdminDelete from './adminDelete';
 import AdminChangePass from './adminChangePass';
 import EventCreate from '../events/eventCreate';
 import DocumentCreate from '../documents/documentCreate';
+import Documents from '../documents/documents';
 
 export default class AdminPortal extends React.Component {
     state = {
         activeTab: '1',
-        budgets: [],
+        //documents: [],
         events: {
             futureEvents: [],
             pastEvents: [],
@@ -22,14 +22,14 @@ export default class AdminPortal extends React.Component {
         },
         user: [],
         eventModal: false,
-        budgetModal: false,
         createUserModal: false,
         createBudgetModal: false,
         changePassModal: false,
         deleteUserModal: false,
         eventCreateModal: false,
-        eventEdit: {},
-        budgetEdit: {},
+        documentDetailsModal: false,
+        detailDataId: null,
+        eventEdit: {}
     }
     constructor(props) {
         super(props);
@@ -43,20 +43,6 @@ export default class AdminPortal extends React.Component {
         }
     }
     fetchBudgetEvents = () => {
-        fetch(`${APIURL}/budget/alldocuments`, {
-            method: 'GET',
-            headers: {
-                "Authorization": localStorage.getItem('token'),
-                "Content-Type": 'application/json'
-            }
-        })
-            .then(response => response.json())
-            .then(data => {
-                this.setState({
-                    budgets: data,
-                });
-            })
-            .catch(err => console.log(err));
         fetch(`${APIURL}/posts/alleventposts`, {
             method: 'GET',
             headers: {
@@ -93,33 +79,18 @@ export default class AdminPortal extends React.Component {
             });
         }
     }
-    deleteFile = (e) => {
-        //console.log(e.target.name + "  " + e.target.id)
-        fetch(`${APIURL}/admin/${e.target.name}/${e.target.id}`, {
-            method: 'DELETE',
-            headers: {
-                "Authorization": localStorage.getItem('token'),
-                "Content-Type": 'application/json'
-            }
-        })
-            .then(info => window.location.reload())
-            .catch(err => console.log(err));
-    }
     editEventToggle = (event) => {
         this.setState({
             eventEdit: event,
             eventModal: !this.state.eventModal
         });
     }
-    editBudgetToggle = (event) => {
-        this.setState({
-            budgetEdit: event,
-            budgetModal: !this.state.budgetModal
-        });
-    }
     userToggle = (e) => {
         this.setState({ [e.target.name]: !this.state[e.target.name] });
     }
+
+
+
     render() {
         return (
             <div className="secondaryContainer">
@@ -287,33 +258,7 @@ export default class AdminPortal extends React.Component {
                                 {(this.state.token) ?
                                     <Button className='mainBtn' name='createBudgetModal' onClick={this.userToggle}>Add New File</Button> : null
                                 }
-                                <div className='admin'>
-                                    {(this.state.budgets.length > 0) ?
-                                        (this.state.budgets.map(file => {
-                                            return (
-                                                <div key={file.id} className='adminBudgets'>
-                                                    <p>{file.fileYear}</p>
-                                                    <h5>{file.fileName}</h5>
-                                                    <object className='iframe' data={file.fileBinary} title={file.fileName} >
-                                                        <p>Oops! You don't support PDFs!</p>
-                                                        <p><a download={file.fileName} href={file.fileBinary}>Download Instead</a></p>
-                                                    </object>
-                                                    <p className="docDescription"><strong>Document Description:</strong> {file.description}</p>
-                                                    <p><strong>Date File Uploaded: </strong>{file.updatedAt.substring(0, 10)}</p>
-                                                    {(this.state.token) ?
-                                                        <div>
-                                                            <Button onClick={e => { e.preventDefault(); this.editBudgetToggle(file) }}>Edit</Button>
-                                                            <Button color='danger' name="deletebudgetfile" id={file.id} onClick={this.deleteFile}>Delete</Button>
-                                                        </div> : null
-                                                    }
-                                                </div>
-                                            )
-                                        }))
-                                        : <div className='budgetFiller'>
-                                            <h2>No budgets found</h2>
-                                        </div>
-                                    }
-                                </div>
+                                <Documents />
                             </Col>
                         </Row>
                     </TabPane>
@@ -345,9 +290,6 @@ export default class AdminPortal extends React.Component {
                 </TabContent>
                 {(this.state.eventModal) ?
                     <EventEdit data={this.state.eventEdit} exit={this.editEventToggle} /> : null
-                }
-                {(this.state.budgetModal) ?
-                    <DocumentEdit data={this.state.budgetEdit} exit={this.editBudgetToggle} /> : null
                 }
                 {(this.state.createUserModal) ? <AdminCreate exit={this.userToggle} /> : null}
                 {(this.state.deleteUserModal) ? <AdminDelete data={this.state.user} exit={this.userToggle} /> : null}

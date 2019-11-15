@@ -4,15 +4,15 @@ import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 export default class DocumentEdit extends React.Component {
     state = this.props.data
-
+    componentDidMount() {
+        console.log(this.state)
+    }
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value })
         console.log(event.target.value);
         console.log(this.state);
     }
     handleSubmit = (e) => {
-        // console.log(this.state);
-        // console.log(e.target.id)
         fetch(`${APIURL}/admin/updatebudgetfile/${this.state.id}`, {
             method: 'PUT',
             headers: {
@@ -32,7 +32,7 @@ export default class DocumentEdit extends React.Component {
                     <Form onSubmit={this.handleSubmit}>
                         <FormGroup >
                             <Label>Select document label:</Label><br />
-                            <Input type="select" name="documentType" onChange={this.handleChange}>
+                            <Input type="select" value={this.state.documentType} name="documentType" onChange={this.handleChange}>
                                 <option name="documentType" value="Budget">Budget</option>
                                 <option name="documentType" value="Minutes">Minutes</option>
                                 <option name="documentType" value="Resolutions">Resolutions</option>
@@ -46,17 +46,17 @@ export default class DocumentEdit extends React.Component {
                         </FormGroup>
                         <FormGroup>
                             <Label>Document Title:</Label>
-                            <Input type='text' name='fileName' onChange={this.handleChange} />
+                            <Input type='text' value={this.state.fileName} name='fileName' onChange={this.handleChange} />
                         </FormGroup>
                         <FormGroup>
                             <Label>Document Date:</Label>
-                            <Input type='number' name='fileDate' onChange={this.handleChange} min='1990' />
+                            <Input type='date' value={this.state.fileDate} name='fileDate' onChange={this.handleChange} min='1990' />
                         </FormGroup>
                         <FormGroup>
                             <Label>Document Description:</Label>
-                            <Input type='textarea' name='description' onChange={this.handleChange} />
+                            <Input type='textarea' value={this.state.description} name='description' onChange={this.handleChange} />
                         </FormGroup>
-                        <Button className='mainBtn' type='submit'>Add File</Button>
+                        <Button className='mainBtn' type='submit'>Update File</Button>
                     </Form>
                 </div>
             </div>

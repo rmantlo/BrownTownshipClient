@@ -4,21 +4,21 @@
 
 .docContainer {
     display: flex;
+    flex-direction: row;
     justify-content: space-evenly;
 }
 
 .searchDocs {
     border-radius: 5px;
     margin: 0 20px;
-    background: red;
+    background: rgb(185, 0, 0);
     width: 200px;
-    height: 400px;
+    height: 200px;
 }
 
 .docAssortment {
     display: flex;
     width: 60vw;
-    border: 1px solid grey;
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
@@ -27,9 +27,17 @@
     height: 200px;
     width: 200px;
     border-radius: 1px;
-    background: rgb(211, 189, 141);
-    padding: 10px;
+    background: rgba(255, 239, 185);
+    padding: 10px 10px 0 10px;
+    border-bottom: 10px solid rgba(255, 239, 185);
     margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+.docSquare h4{
+    word-wrap: break-word;
 }
 
 .docDescription {
@@ -47,7 +55,7 @@
 .documentModal {
     width: 90vw;
     min-width: 320px;
-    max-height: 90vh;
+    height: 90vh;
     position: fixed;
     left: 50%;
     top: 50%;
@@ -60,10 +68,12 @@
 
 .documentInner {
     margin-top: 30px;
-    max-height: 10%;
+    max-height: 90%;
     overflow-y: auto;
 }
-
+.documentInner p{
+    padding: 10px;
+}
 .iframe {
     width: 95%;
     min-width: 300px;
@@ -74,4 +84,14 @@
 
 .budgetFiller {
     height: 300px;
+}
+
+@media only screen and (max-width: 700px) {
+    .docContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+    .docAssortment{
+        width: 100%;
+    }
 }
