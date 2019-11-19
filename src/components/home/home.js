@@ -1,7 +1,8 @@
 import React from 'react';
 import './home.css';
 import APIURL from '../../helpers/environment';
-import { Card, CardText, Container, Jumbotron } from 'reactstrap';
+import { Card, Container, Jumbotron } from 'reactstrap';
+import EventDetails from '../events/eventDetails';
 
 export default class Home extends React.Component {
     state = {}
@@ -18,25 +19,6 @@ export default class Home extends React.Component {
             })
     }
     render() {
-        var timeValue;
-        var title;
-        if (this.state.data) {
-            let time = (this.state.data.timeOfEvent.substring(0, 5)).split(':');
-            var hours = Number(time[0]);
-            var minutes = Number(time[1]);
-
-            if (hours > 0 && hours <= 12) {
-                timeValue = "" + hours;
-            } else if (hours > 12) {
-                timeValue = "" + (hours - 12);
-            } else if (hours === 0) {
-                timeValue = "12";
-            }
-            timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
-            timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
-            title = this.state.data.title.charAt(0).substring(0, 1) + (this.state.data.title.toLowerCase()).slice(1)
-        }
-
         return (
             <div>
                 <Jumbotron fluid>
@@ -49,33 +31,8 @@ export default class Home extends React.Component {
                         <hr />
                         <p>Welcome to Brown Township - One of twelve in Hendricks County.</p>
                         <p>Our current Township Trustee, Nathan Mantlo, took office on January 1st, 2019. A Township Trustee is an elected official for the local government. The Trustee acts as an administration for a township, and works with other board members in adopting annual budgets, managing finance and township contracts. A Trustee, in common with most other state officials, serves a term of four years.</p>
-                    </div>
-                    <div className="homeCard">
-                        <h2>Township Assistance</h2>
-                        <hr />
-                        <p>This site was created as a way for people to get up to date township information and access to reliable Township and Community Assistance information.</p>
-                        <p>Nagivate to our township assistance page from the nav bar above, or click <a href="/assistance">here</a>.</p>
                         <br />
-                        <br />
-                        <div>
-                            {(this.state.data) ?
-                                <div>
-                                    <p>Next upcoming event:</p>
-                                    <Card >
-                                        <p id='eventType'>Next Upcoming Meeting</p>
-                                        <h2 className='homeCardTitle'>{title}</h2>
-                                        <p className='eventDateTime'>{timeValue}, {this.state.data.dateOfEvent}</p>
-                                        <p className='eventDateTime'>{this.state.data.streetAddress}, {this.state.data.city}, {this.state.data.state} {this.state.data.zipcode}</p>
-                                        <CardText className='message'>{this.state.data.forumMessage}</CardText>
-
-                                    </Card>
-                                </div> : null
-                            }
-                        </div>
-                    </div>
-                    <div className="homeCard trusteeInfo">
-                        <h2>Contact Us</h2>
-                        <hr />
+                        <h3>Contact Us</h3>
                         <p><strong>Brown Township Office</strong></p>
                         <p>7455 East County Road 1000 North</p>
                         <p>Brownsburg, IN 46112</p>
@@ -85,6 +42,38 @@ export default class Home extends React.Component {
                         <p>12PM-4PM Tuesdays and Thursdays</p>
                         <p><strong>Email</strong></p>
                         <p>browntownshipin@gmail.com</p>
+                    </div>
+                    <div className="homeCard">
+                        <h2>Township Assistance</h2>
+                        <hr />
+                        <p>This site was created as a way for people to get up to date township information and access to reliable Township and Community Assistance information.</p>
+                        <p>Nagivate to our township assistance page from the navigation bar above, or click <a href="/assistance">here</a>.</p>
+                        <br />
+                        <br />
+                        <div>
+                            {(this.state.data) ?
+                                <div>
+                                    <p>Next upcoming event:</p>
+                                    <Card >
+                                        <EventDetails data={this.state.data} />
+                                    </Card>
+                                </div> : null
+                            }
+                        </div>
+                    </div>
+                    <div className="homeCard trusteeInfo">
+                        <h2>Fire Territory</h2>
+                        <hr />
+                        <p><strong>Fire Chief</strong></p>
+                        <p>Larry Alcorn</p>
+                        <p><strong>Brownburg Fire Territory Headquarters & Training Facility</strong></p>
+                        <p>470 East Northfield Drive</p>
+                        <p>Brownsburg, IN 46112</p>
+                        <p><strong>Phone Number</strong></p>
+                        <p>(317) 852-1190</p>
+                        <p><strong>Hours</strong></p>
+                        <p>8:00AM-4:30PM Monday-Friday</p>
+                        <p><a href="http://www.brownsburgfire.org/">http://www.brownsburgfire.org/</a></p>
                     </div>
                 </section>
             </div>

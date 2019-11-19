@@ -7,10 +7,10 @@ export default class DocumentCreate extends React.Component {
 
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value })
-        console.log(event.target.value);
-        console.log(this.state[event.target.name]);
-        console.log(this.state);
-        console.log(document.getElementById('upload').files[0])
+        // console.log(event.target.value);
+        // console.log(this.state[event.target.name]);
+        // console.log(this.state);
+        // console.log(document.getElementById('upload').files[0])
     }
     handleCreateSubmit = (e) => {
         let doc = document.getElementById('upload').files[0];
@@ -21,9 +21,9 @@ export default class DocumentCreate extends React.Component {
         reader.readAsDataURL(blob)
         reader.onloadend = (e) => {
             //const view = new UInt8Array(reader.result);
-            console.log(reader.result);
+            //console.log(reader.result);
             result = reader.result;
-            console.log(result);
+            //console.log(result);
             fetch(`${APIURL}/admin/uploaddocument`, {
                 method: 'POST',
                 headers: {

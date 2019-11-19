@@ -3,7 +3,8 @@
 }
 
 .myCard {
-    width: 50vw auto;
+    width: 90%;
+    margin: 10px auto;
     min-width: 300px;
     text-align: left;
 }
@@ -21,6 +22,7 @@
     margin: 0;
     font-size: 8pt;
     color: grey;
+    text-indent: unset;
 }
 
 .myCard h2 {
@@ -40,11 +42,12 @@
     overflow: auto;
     border-top: 0.5px solid rgb(185, 185, 185);
     border-left: 0.5px solid rgb(185, 185, 185);
-    padding: 0 10px;
-    font-size: 14pt;
+    padding: 10px;
+    /* font-size: 14pt; */
     color: black !important;
     text-indent: 20px;
     max-height: 300px;
+    min-height: 100px;
 }
 
 @media only screen and (max-width: 875px) {

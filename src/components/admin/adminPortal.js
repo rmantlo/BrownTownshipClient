@@ -1,7 +1,7 @@
 import React from 'react';
 import APIURL from '../../helpers/environment';
 import './adminportal.css';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Button, Card, CardBody, CardText } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Button, Card } from 'reactstrap';
 import classnames from 'classnames';
 import EventEdit from '../events/eventEdit';
 import AdminCreate from './adminCreate';
@@ -10,6 +10,7 @@ import AdminChangePass from './adminChangePass';
 import EventCreate from '../events/eventCreate';
 import DocumentCreate from '../documents/documentCreate';
 import Documents from '../documents/documents';
+import EventDetails from '../events/eventDetails';
 
 export default class AdminPortal extends React.Component {
     state = {
@@ -88,7 +89,16 @@ export default class AdminPortal extends React.Component {
     userToggle = (e) => {
         this.setState({ [e.target.name]: !this.state[e.target.name] });
     }
-
+    deleteFile = (e) => {
+        fetch(`${APIURL}/admin/deletepost/${e.target.id}`, {
+            method: 'DELETE',
+            headers: {
+                "Authorization": localStorage.getItem('token'),
+                "Content-Type": 'application/json'
+            }
+        })
+            .then(res => window.location.reload())
+    }
 
 
     render() {
@@ -129,65 +139,26 @@ export default class AdminPortal extends React.Component {
                                     <div className='adminEvents'>
                                         <h2>Upcoming Meetings and Events</h2>
                                         {(this.state.events.tbdEvents.length > 0) ? (this.state.events.tbdEvents.map(event => {
-                                            let time = (event.timeOfEvent.substring(0, 5)).split(':');
-                                            var hours = Number(time[0]);
-                                            var minutes = Number(time[1]);
-                                            var timeValue;
-                                            if (hours > 0 && hours <= 12) {
-                                                timeValue = "" + hours;
-                                            } else if (hours > 12) {
-                                                timeValue = "" + (hours - 12);
-                                            } else if (hours === 0) {
-                                                timeValue = "12";
-                                            }
-                                            timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
-                                            timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
                                             return (
                                                 <Card className='myCard adminCard' key={event.id}>
-                                                    <CardBody>
-                                                        <p id='eventType'>{event.type}</p>
-                                                        <h2>{(event.title).charAt(0).toUpperCase() + (event.title.toLowerCase()).slice(1)}</h2>
-                                                        <p className='eventDateTime'>{timeValue}, {event.dateOfEvent}</p>
-                                                        <p className='eventDateTime'>Location: {event.streetAddress}, {event.city}, {event.state} {event.zipcode}</p>
-                                                        <CardText className='message' >{event.forumMessage}</CardText>
-                                                    </CardBody>
+                                                    <EventDetails data={event} />
                                                     {(this.state.token) ?
                                                         <div>
                                                             <Button onClick={e => { e.preventDefault(); this.editEventToggle(event) }}>Edit</Button>
-                                                            <Button color='danger' name="deletepost" id={event.id} onClick={this.deleteFile}>Delete</Button>
+                                                            <Button color='danger' name="tbdPost" id={event.id} onClick={this.deleteFile}>Delete</Button>
                                                         </div> : null
                                                     }
                                                 </Card>)
                                         })) : null}
                                         {(this.state.events.futureEvents.length > 0) ?
                                             (this.state.events.futureEvents.map(event => {
-                                                let time = (event.timeOfEvent.substring(0, 5)).split(':');
-                                                var hours = Number(time[0]);
-                                                var minutes = Number(time[1]);
-                                                var timeValue;
-
-                                                if (hours > 0 && hours <= 12) {
-                                                    timeValue = "" + hours;
-                                                } else if (hours > 12) {
-                                                    timeValue = "" + (hours - 12);
-                                                } else if (hours === 0) {
-                                                    timeValue = "12";
-                                                }
-                                                timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
-                                                timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
                                                 return (
                                                     <Card className='myCard adminCard' key={event.id}>
-                                                        <CardBody>
-                                                            <p id='eventType'>{event.type}</p>
-                                                            <h2>{(event.title).charAt(0).toUpperCase() + (event.title.toLowerCase()).slice(1)}</h2>
-                                                            <p className='eventDateTime'>{timeValue}, {event.dateOfEvent}</p>
-                                                            <p className='eventDateTime'>Location: {event.streetAddress}, {event.city}, {event.state} {event.zipcode}</p>
-                                                            <CardText className='message' >{event.forumMessage}</CardText>
-                                                        </CardBody>
+                                                        <EventDetails data={event} />
                                                         {(this.state.token) ?
                                                             <div>
                                                                 <Button onClick={e => { e.preventDefault(); this.editEventToggle(event) }}>Edit</Button>
-                                                                <Button color='danger' name="deletepost" id={event.id} onClick={this.deleteFile}>Delete</Button>
+                                                                <Button color='danger' name="futurePost" id={event.id} onClick={this.deleteFile}>Delete</Button>
                                                             </div> : null
                                                         }
                                                     </Card>)
@@ -212,33 +183,13 @@ export default class AdminPortal extends React.Component {
                                         <h2>Past Meetings and Events</h2>
                                         {(this.state.events.pastEvents.length > 0) ?
                                             (this.state.events.pastEvents.map(event => {
-                                                let time = (event.timeOfEvent.substring(0, 5)).split(':');
-                                                var hours = Number(time[0]);
-                                                var minutes = Number(time[1]);
-                                                var timeValue;
-
-                                                if (hours > 0 && hours <= 12) {
-                                                    timeValue = "" + hours;
-                                                } else if (hours > 12) {
-                                                    timeValue = "" + (hours - 12);
-                                                } else if (hours === 0) {
-                                                    timeValue = "12";
-                                                }
-                                                timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
-                                                timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
                                                 return (
                                                     <Card className='myCard adminCard' key={event.id}>
-                                                        <CardBody>
-                                                            <p id='eventType'>{event.type}</p>
-                                                            <h2>{(event.title).charAt(0).toUpperCase() + (event.title.toLowerCase()).slice(1)}</h2>
-                                                            <p className='eventDateTime'>{timeValue}, {event.dateOfEvent}</p>
-                                                            <p className='eventDateTime'>Location: {event.streetAddress}, {event.city}, {event.state} {event.zipcode}</p>
-                                                            <CardText className='message' >{event.forumMessage}</CardText>
-                                                        </CardBody>
+                                                        <EventDetails data={event} />
                                                         {(this.state.token) ?
                                                             <div>
                                                                 <Button onClick={e => { e.preventDefault(); this.editEventToggle(event) }}>Edit</Button>
-                                                                <Button color='danger' name="deletepost" id={event.id} onClick={this.deleteFile}>Delete</Button>
+                                                                <Button color='danger' name="pastPost" id={event.id} onClick={this.deleteFile}>Delete</Button>
                                                             </div> : null
                                                         }
                                                     </Card>)

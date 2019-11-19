@@ -4,11 +4,13 @@ import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import 'rc-time-picker/assets/index.css';
 import TimePicker from 'rc-time-picker';
 import moment from 'moment';
+import PDFViewer from '../pdfviewer/PDFViewer';
 
 export default class EventEdit extends React.Component {
     state = this.props.data
     format = 'h:mm a';
     now = moment().hour(parseInt((this.state.timeOfEvent).substring(0, 2))).minute(parseInt((this.state.timeOfEvent).substring(3, 5)));
+
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value })
         console.log(event.target.value);
@@ -30,6 +32,10 @@ export default class EventEdit extends React.Component {
         })
             .then()
     }
+    clearDocument = (e) => {
+        e.preventDefault();
+        this.setState({fileBinary: null});
+    }
     render() {
         return (
             <div className='myModal'>
@@ -50,10 +56,16 @@ export default class EventEdit extends React.Component {
                                 <Input type='text' name='title' value={this.state.title} onChange={this.handleChange} />
                             </FormGroup>
                             <Label>Date and Time:</Label>
-                            <FormGroup id="eventLocation">
-                                <Input id='date' type='date' name='dateOfEvent' value={this.state.dateOfEvent} onChange={this.handleChange} min="2000-01-01" />
-                                <TimePicker id='time' type='time' name='timeOfEvent' value={this.now} showSecond={false} use12Hours format={this.format} inputReadOnly onChange={this.handleTime} />
-                            </FormGroup>
+                            {(this.state.dateOfEvent != null) ?
+                                <FormGroup id="eventLocation">
+                                    <Input id='date' type='date' name='dateOfEvent' value={this.state.dateOfEvent} onChange={this.handleChange} min="2000-01-01" />
+                                    <TimePicker id='time' type='time' name='timeOfEvent' value={this.now} showSecond={false} use12Hours format={this.format} inputReadOnly onChange={this.handleTime} />
+                                </FormGroup>
+                                : <FormGroup id="eventLocation">
+                                    <Input id='date' type='date' name='dateOfEvent' onChange={this.handleChange} min="2000-01-01" />
+                                    <TimePicker id='time' type='time' name='timeOfEvent' value={this.now} showSecond={false} use12Hours format={this.format} inputReadOnly onChange={this.handleTime} />
+                                </FormGroup>
+                            }
                             <FormGroup id="eventLocation">
                                 <FormGroup>
                                     <Label for='location'>Street Address: </Label><br />
@@ -130,11 +142,21 @@ export default class EventEdit extends React.Component {
                                 <Label for='message'>Post Message:</Label><br />
                                 <Input id='li_message' type='textarea' name='forumMessage' value={this.state.forumMessage} onChange={this.handleChange} />
                             </FormGroup>
-                            <Button type='submit' id={this.state.id}>Update</Button>
+                            <FormGroup>
+                                <Label for='file'>Upload a Related Document PDF</Label>
+                                {(this.state.fileBinary != null) ?
+                                    <div>
+                                        <PDFViewer data={this.state.fileBinary} />
+                                        <Button color='danger' onClick={this.clearDocument}>Remove Document</Button>
+                                    </div>
+                                    : <Input type='file' name='file' id='eventupload' onChange={this.handleChange} />
+                                }
+                            </FormGroup>
+                            <Button color='danger' type='submit' id={this.state.id}>Update</Button>
                         </Form>
                     </div>
                 </div>
-            </div>
+            </div >
         )
     }
 }

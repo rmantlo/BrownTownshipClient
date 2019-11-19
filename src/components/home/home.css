@@ -7,7 +7,7 @@
 }
 .home{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     margin: 20px 5vw 50px 5vw;
     text-align: left;
@@ -33,4 +33,14 @@
 } 
 .homeCardTitle{
     font-family: 'Roboto', sans-serif;
+}
+@media only screen and (max-width: 1065px){
+    .home{
+        justify-content: left;
+    }
+}
+@media only screen and (max-width: 709px){
+    .home{
+        justify-content: space-evenly;
+    }
 }

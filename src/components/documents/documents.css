@@ -22,7 +22,9 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
-
+.noDocuments{
+    margin: 15vh auto 39vh auto;
+}
 .docSquare {
     height: 200px;
     width: 200px;

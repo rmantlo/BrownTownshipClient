@@ -63,7 +63,7 @@ export default class Documents extends React.Component {
                                         <h4>{doc.fileName}</h4>
                                     </div>)
                             }))
-                                : <div><h5>No Documents Uploaded</h5></div>}
+                                : <div className='noDocuments'><h5>No Documents Uploaded</h5></div>}
                         </div>
                     </div>
                 </div >

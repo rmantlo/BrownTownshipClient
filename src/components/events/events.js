@@ -2,8 +2,9 @@ import React from 'react';
 import './events.css';
 import APIURL from '../../helpers/environment';
 import EventEdit from './eventEdit';
-import { Button, Card, CardText, CardBody, TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
+import { Button, Card, TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
+import EventDetails from './eventDetails';
 
 
 
@@ -12,7 +13,11 @@ export default class Events extends React.Component {
         activeTab: '1',
         eventModal: false,
         editModal: false,
-        data: []
+        data: {
+            futureEvents: [],
+            pastEvents: [],
+            tbdEvents: []
+        }
     }
     constructor(props) {
         super(props);
@@ -29,7 +34,6 @@ export default class Events extends React.Component {
             .then(res => res.json())
             .then(res => {
                 this.setState({ data: res });
-                console.log(this.state.data)
             })
     }
     toggle(tab) {
@@ -57,6 +61,7 @@ export default class Events extends React.Component {
                 "Content-Type": 'application/json'
             }
         })
+        .then(res => window.location.reload())
     }
     render() {
         return (
@@ -79,35 +84,30 @@ export default class Events extends React.Component {
                         <Row>
                             <Col sm="12">
                                 <div className='myDeck'>
-                                    {(this.state.data.length > 0) ?
-                                        (this.state.data.map(event => {
-                                            let time = (event.timeOfEvent.substring(0, 5)).split(':');
-                                            var hours = Number(time[0]);
-                                            var minutes = Number(time[1]);
-                                            var timeValue;
-
-                                            if (hours > 0 && hours <= 12) {
-                                                timeValue = "" + hours;
-                                            } else if (hours > 12) {
-                                                timeValue = "" + (hours - 12);
-                                            } else if (hours === 0) {
-                                                timeValue = "12";
-                                            }
-                                            timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
-                                            timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
+                                    {(this.state.data.tbdEvents.length > 0) ?
+                                        (this.state.data.tbdEvents.map(event => {
                                             return (
                                                 <Card className='myCard' key={event.id}>
-                                                    <CardBody>
-                                                        <p id='eventType'>{event.type}</p>
-                                                        <h2>{event.title}</h2>
-                                                        <p className='eventDateTime'>{timeValue}, {event.dateOfEvent}</p>
-                                                        <p className='eventDateTime'>Location: {event.streetAddress}, {event.city}, {event.state} {event.zipcode}</p>
-                                                        <CardText className="message">{event.forumMessage}</CardText>
-                                                    </CardBody>
+                                                    <EventDetails data={event} />
                                                     {(this.state.token) ?
                                                         <div>
                                                             <Button onClick={e => { e.preventDefault(); this.toggleEdit(event) }}>Edit</Button>
-                                                            <Button name="deletepost" id={event.id} onClick={this.deleteFile}>Delete</Button>
+                                                            <Button color='danger' name="deletepost" id={event.id} onClick={this.deleteFile}>Delete</Button>
+                                                        </div> : null
+                                                    }
+                                                </Card>)
+                                        }))
+                                        : null
+                                    }
+                                    {(this.state.data.futureEvents.length > 0) ?
+                                        (this.state.data.futureEvents.map(event => {
+                                            return (
+                                                <Card className='myCard' key={event.id}>
+                                                    <EventDetails data={event} />
+                                                    {(this.state.token) ?
+                                                        <div>
+                                                            <Button onClick={e => { e.preventDefault(); this.toggleEdit(event) }}>Edit</Button>
+                                                            <Button color='danger' name="deletepost" id={event.id} onClick={this.deleteFile}>Delete</Button>
                                                         </div> : null
                                                     }
                                                 </Card>)
@@ -124,35 +124,15 @@ export default class Events extends React.Component {
                         <Row>
                             <Col sm="12">
                                 <div className='myDeck'>
-                                    {(this.state.data.length > 0) ?
-                                        (this.state.data.map(event => {
-                                            let time = (event.timeOfEvent.substring(0, 5)).split(':');
-                                            var hours = Number(time[0]);
-                                            var minutes = Number(time[1]);
-                                            var timeValue;
-
-                                            if (hours > 0 && hours <= 12) {
-                                                timeValue = "" + hours;
-                                            } else if (hours > 12) {
-                                                timeValue = "" + (hours - 12);
-                                            } else if (hours === 0) {
-                                                timeValue = "12";
-                                            }
-                                            timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
-                                            timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
+                                    {(this.state.data.pastEvents.length > 0) ?
+                                        (this.state.data.pastEvents.map(event => {
                                             return (
                                                 <Card className='myCard' key={event.id}>
-                                                    <CardBody>
-                                                        <p id='eventType'>{event.type}</p>
-                                                        <h2>{event.title}</h2>
-                                                        <p className='eventDateTime'>{timeValue}, {event.dateOfEvent}</p>
-                                                        <p className='eventDateTime'>Location: {event.streetAddress}, {event.city}, {event.state} {event.zipcode}</p>
-                                                        <CardText className="message">{event.forumMessage}</CardText>
-                                                    </CardBody>
+                                                    <EventDetails data={event} />
                                                     {(this.state.token) ?
                                                         <div>
                                                             <Button onClick={e => { e.preventDefault(); this.toggleEdit(event) }}>Edit</Button>
-                                                            <Button name="deletepost" id={event.id} onClick={this.deleteFile}>Delete</Button>
+                                                            <Button color='danger' name="deletepost" id={event.id} onClick={this.deleteFile}>Delete</Button>
                                                         </div> : null
                                                     }
                                                 </Card>)

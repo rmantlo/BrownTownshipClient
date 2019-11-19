@@ -8,27 +8,79 @@ import moment from 'moment';
 export default class EventCreate extends React.Component {
     state = {
         type: "Meeting",
-        time: "12:00:00"
+        time: "12:00 PM"
     }
     format = 'h:mm a';
     now = moment().hour(12).minute(0);
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value })
+        console.log(this.state);
     }
     handleTime = (e) => {
         this.setState({ time: e.format(this.format) });
     }
     handleSubmit = (e) => {
-        fetch(`${APIURL}/admin/createevent`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token')
-            },
-            body: JSON.stringify(this.state)
-        })
-            .then()
+        let element = document.getElementById('eventupload');
+        if (element.files.length > 0) {
+            let doc = element.files[0];
+            if (doc.type !== 'application/pdf') { alert('File upload must be a PDF!') }
+            let result = '';
+            console.log(doc);
+            let blob = new Blob([doc], { type: "application/pdf" });
+            const reader = new FileReader();
+            reader.readAsDataURL(blob)
+            reader.onloadend = (e) => {
+                //console.log(reader.result);
+                result = reader.result;
+                fetch(`${APIURL}/admin/createevent`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': localStorage.getItem('token')
+                    },
+                    body: JSON.stringify({
+                        title: this.state.title,
+                        message: this.state.message,
+                        date: this.state.date,
+                        time: this.state.time,
+                        type: this.state.type,
+                        location: this.state.location,
+                        city: this.state.city,
+                        state: this.state.state,
+                        zipcode: this.state.zipcode,
+                        data: result,
+                        fileType: doc.type
+                    })
+                })
+                    .then()
+            }
+        }
+        else {
+            fetch(`${APIURL}/admin/createevent`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.getItem('token')
+                },
+                body: JSON.stringify({
+                    title: this.state.title,
+                    message: this.state.message,
+                    date: this.state.date,
+                    time: this.state.time,
+                    type: this.state.type,
+                    location: this.state.location,
+                    city: this.state.city,
+                    state: this.state.state,
+                    zipcode: this.state.zipcode,
+                    data: null,
+                    fileType: "No file"
+                })
+            })
+                .then()
+        }
     }
+
+
 
     render() {
         return (
@@ -125,8 +177,12 @@ export default class EventCreate extends React.Component {
                                 </FormGroup>
                             </FormGroup>
                             <FormGroup>
-                                <Label for='message'>Details:</Label><br />
+                                <Label for='message'>Post Message:</Label><br />
                                 <Input id='li_message' type='textarea' name='message' placeholder='Enter details of this event or meeting!' onChange={this.handleChange} />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for='file'>Upload a Related Document PDF</Label>
+                                <Input type='file' name='file' id='eventupload' onChange={this.handleChange} />
                             </FormGroup>
                             <Button type='submit'>Create</Button>
                         </Form>
