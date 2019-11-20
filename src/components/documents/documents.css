@@ -2,6 +2,15 @@
     margin-top: 30px;
 }
 
+.documentBackground {
+    background: url('../../assets/1800sBrownTownshipRoadRegistry1.jpg');
+    background-size: cover;
+    border-radius: 5px;
+    margin: -10px 0;
+    padding: 10px 0;
+    min-height: 70vh;
+}
+
 .docContainer {
     display: flex;
     flex-direction: row;
@@ -12,6 +21,7 @@
     border-radius: 5px;
     margin: 0 20px;
     background: rgb(185, 0, 0);
+    padding: 10px;
     width: 200px;
     height: 200px;
 }
@@ -20,11 +30,15 @@
     display: flex;
     width: 60vw;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: flex-start;
 }
-.noDocuments{
-    margin: 15vh auto 39vh auto;
+
+.noDocuments {
+    margin: 15vh auto;
+    color: white;
+    text-shadow: 1px 1px 1px black;
 }
+
 .docSquare {
     height: 200px;
     width: 200px;
@@ -38,7 +52,41 @@
     align-items: center;
     overflow: hidden;
 }
-.docSquare h4{
+
+#docHover {
+    visibility: hidden;
+    width: 127px;
+    background-color: rgb(255,255,255,0.5);
+    color: black;
+    font-size: 8pt;
+    text-align: center;
+    padding: 5px 1px;
+    border-radius: 3px;
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    top: auto;
+    bottom: auto;
+    margin-left: 130px;
+}
+
+.docSquare:hover #docHover {
+    visibility: visible;
+}
+
+#docHover::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    z-index: 5;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent rgb(255,255,255,0.5) transparent transparent;
+}
+
+.docSquare h4 {
     word-wrap: break-word;
 }
 
@@ -73,9 +121,11 @@
     max-height: 90%;
     overflow-y: auto;
 }
-.documentInner p{
+
+.documentInner p {
     padding: 10px;
 }
+
 .iframe {
     width: 95%;
     min-width: 300px;
@@ -92,8 +142,14 @@
     .docContainer {
         flex-direction: column;
         align-items: center;
+        justify-content: flex-start;
     }
-    .docAssortment{
+    .docAssortment {
         width: 100%;
+    }
+}
+@media only screen and (max-width: 535px){
+    .docAssortment{
+        justify-content: center;
     }
 }

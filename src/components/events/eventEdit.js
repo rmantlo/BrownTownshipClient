@@ -17,8 +17,8 @@ export default class EventEdit extends React.Component {
         console.log(this.state);
     }
     handleTime = (e) => {
-        console.log(e.format(this.format));
-        this.setState({ time: e.format(this.format) });
+        console.log(e);
+        this.setState({ timeOfEvent: e.format(this.format) });
         console.log(this.state)
     }
     handleSubmit = (e) => {
@@ -53,27 +53,27 @@ export default class EventEdit extends React.Component {
                             </FormGroup>
                             <FormGroup>
                                 <Label for='title'>Title: </Label><br />
-                                <Input type='text' name='title' value={this.state.title} onChange={this.handleChange} />
+                                <Input type='text' name='title' value={this.state.title} onChange={this.handleChange} required />
                             </FormGroup>
                             <Label>Date and Time:</Label>
                             {(this.state.dateOfEvent != null) ?
                                 <FormGroup id="eventLocation">
                                     <Input id='date' type='date' name='dateOfEvent' value={this.state.dateOfEvent} onChange={this.handleChange} min="2000-01-01" />
-                                    <TimePicker id='time' type='time' name='timeOfEvent' value={this.now} showSecond={false} use12Hours format={this.format} inputReadOnly onChange={this.handleTime} />
+                                    <TimePicker id='time' type='time' name='timeOfEvent' defaultValue={this.now} showSecond={false} use12Hours format={this.format} inputReadOnly onChange={this.handleTime} />
                                 </FormGroup>
                                 : <FormGroup id="eventLocation">
                                     <Input id='date' type='date' name='dateOfEvent' onChange={this.handleChange} min="2000-01-01" />
-                                    <TimePicker id='time' type='time' name='timeOfEvent' value={this.now} showSecond={false} use12Hours format={this.format} inputReadOnly onChange={this.handleTime} />
+                                    <TimePicker id='time' type='time' name='timeOfEvent' defaultValue={this.now} showSecond={false} use12Hours format={this.format} inputReadOnly onChange={this.handleTime} />
                                 </FormGroup>
                             }
                             <FormGroup id="eventLocation">
                                 <FormGroup>
                                     <Label for='location'>Street Address: </Label><br />
-                                    <Input id='li_location' type='text' name='streetAddress' value={this.state.streetAddress} onChange={this.handleChange} />
+                                    <Input id='li_location' type='text' name='streetAddress' value={this.state.streetAddress} onChange={this.handleChange} required />
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for='city'>City: </Label><br />
-                                    <Input id='li_city' type='text' name='city' value={this.state.city} onChange={this.handleChange} />
+                                    <Input id='li_city' type='text' name='city' value={this.state.city} onChange={this.handleChange} required/>
                                 </FormGroup>
                             </FormGroup>
                             <FormGroup id='eventLocation'>
@@ -135,12 +135,12 @@ export default class EventEdit extends React.Component {
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for='zipcode'>Zipcode:</Label><br />
-                                    <Input type='text' name='zipcode' value={this.state.zipcode} onChange={this.handleChange} />
+                                    <Input type='text' name='zipcode' value={this.state.zipcode} onChange={this.handleChange} required/>
                                 </FormGroup>
                             </FormGroup>
                             <FormGroup>
                                 <Label for='message'>Post Message:</Label><br />
-                                <Input id='li_message' type='textarea' name='forumMessage' value={this.state.forumMessage} onChange={this.handleChange} />
+                                <Input id='li_message' type='textarea' name='forumMessage' value={this.state.forumMessage} onChange={this.handleChange} required/>
                             </FormGroup>
                             <FormGroup>
                                 <Label for='file'>Upload a Related Document PDF</Label>

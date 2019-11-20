@@ -3,8 +3,7 @@ import APIURL from '../../helpers/environment';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 export default class DocumentCreate extends React.Component {
-    state = { }
-
+    state = {}
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value })
         // console.log(event.target.value);
@@ -14,16 +13,13 @@ export default class DocumentCreate extends React.Component {
     }
     handleCreateSubmit = (e) => {
         let doc = document.getElementById('upload').files[0];
-        if(doc.type !== 'application/pdf'){ alert('File upload must be a PDF!')}
+        if (doc.type !== 'application/pdf') { alert('File upload must be a PDF!') }
         let result = '';
         let blob = new Blob([doc], { type: "application/pdf" });
         const reader = new FileReader();
         reader.readAsDataURL(blob)
         reader.onloadend = (e) => {
-            //const view = new UInt8Array(reader.result);
-            //console.log(reader.result);
             result = reader.result;
-            //console.log(result);
             fetch(`${APIURL}/admin/uploaddocument`, {
                 method: 'POST',
                 headers: {
@@ -39,8 +35,8 @@ export default class DocumentCreate extends React.Component {
                     fileType: doc.type,
                 })
             })
-                .then(response => response.json())
-                .then(data => console.log(data))
+                .then(response => { response.json(); })
+                .then(data => { console.log(data); window.location.reload() })
                 .catch(err => console.log(err));
         }
     }
@@ -49,11 +45,11 @@ export default class DocumentCreate extends React.Component {
         return (
             <div className='myModal'>
                 <div className='modalContent'>
-                    <Button id='exitBtn' name='createBudgetModal' onClick={(e) => {this.props.exit(e); }} >X</Button>
+                    <Button id='exitBtn' name='createBudgetModal' onClick={(e) => { this.props.exit(e); }} >X</Button>
                     <br />
                     <Form onSubmit={this.handleCreateSubmit}>
                         <FormGroup >
-                            <Label>Select document label:</Label><br/>
+                            <Label>Select document label:</Label><br />
                             <Input type="select" name="documentType" onChange={this.handleChange}>
                                 <option name="documentType" value="Budget">Budget</option>
                                 <option name="documentType" value="Minutes">Minutes</option>
@@ -64,15 +60,15 @@ export default class DocumentCreate extends React.Component {
                         </FormGroup>
                         <FormGroup>
                             <Label>Upload new PDF File: </Label>
-                            <Input type='file' name='file' id='upload' onChange={this.handleChange} />
+                            <Input type='file' name='file' id='upload' onChange={this.handleChange} required/>
                         </FormGroup>
                         <FormGroup>
                             <Label>Document Title:</Label>
-                            <Input type='text' name='fileName' onChange={this.handleChange} />
+                            <Input type='text' name='fileName' onChange={this.handleChange} required/>
                         </FormGroup>
                         <FormGroup>
                             <Label>Document Date:</Label>
-                            <Input type='date' name='fileDate' onChange={this.handleChange} />
+                            <Input type='date' name='fileDate' onChange={this.handleChange} required/>
                         </FormGroup>
                         <FormGroup>
                             <Label>Document Description:</Label>

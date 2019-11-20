@@ -46,15 +46,15 @@ export default class DocumentEdit extends React.Component {
                         </FormGroup>
                         <FormGroup>
                             <Label>Document Title:</Label>
-                            <Input type='text' value={this.state.fileName} name='fileName' onChange={this.handleChange} />
+                            <Input type='text' value={this.state.fileName} name='fileName' onChange={this.handleChange} required/>
                         </FormGroup>
                         <FormGroup>
                             <Label>Document Date:</Label>
-                            <Input type='date' value={this.state.fileDate} name='fileDate' onChange={this.handleChange} min='1990' />
+                            <Input type='date' value={this.state.fileDate} name='fileDate' onChange={this.handleChange} required/>
                         </FormGroup>
                         <FormGroup>
                             <Label>Document Description:</Label>
-                            <Input type='textarea' value={this.state.description} name='description' onChange={this.handleChange} />
+                            <Input type='textarea' value={this.state.description} name='description' onChange={this.handleChange} required/>
                         </FormGroup>
                         <Button className='mainBtn' type='submit'>Update File</Button>
                     </Form>

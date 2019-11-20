@@ -30,7 +30,6 @@ export default class EventCreate extends React.Component {
             const reader = new FileReader();
             reader.readAsDataURL(blob)
             reader.onloadend = (e) => {
-                //console.log(reader.result);
                 result = reader.result;
                 fetch(`${APIURL}/admin/createevent`, {
                     method: 'POST',
@@ -98,7 +97,7 @@ export default class EventCreate extends React.Component {
                             </FormGroup>
                             <FormGroup>
                                 <Label for='title'>Title: </Label><br />
-                                <Input id='li_title' type='text' name='title' placeholder='enter title' onChange={this.handleChange} />
+                                <Input id='li_title' type='text' name='title' placeholder='enter title' onChange={this.handleChange} required/>
                             </FormGroup>
                             <FormGroup id="eventLocation">
                                 <Input id='date' type='date' name='date' onChange={this.handleChange} min="2000-01-01" />
@@ -107,17 +106,17 @@ export default class EventCreate extends React.Component {
                             <FormGroup id="eventLocation">
                                 <FormGroup>
                                     <Label for='location'>Street Address: </Label><br />
-                                    <Input id='li_location' type='text' name='location' placeholder='enter street address' onChange={this.handleChange} />
+                                    <Input id='li_location' type='text' name='location' placeholder='enter street address' onChange={this.handleChange} required />
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for='city'>City: </Label><br />
-                                    <Input id='li_city' type='text' name='city' placeholder='enter city' onChange={this.handleChange} />
+                                    <Input id='li_city' type='text' name='city' placeholder='enter city' onChange={this.handleChange} required/>
                                 </FormGroup>
                             </FormGroup>
                             <FormGroup id="eventLocation">
                                 <FormGroup>
                                     <Label for="state">State: </Label><br />
-                                    <Input type="select" name="state" id="state" onChange={this.handleChange}>
+                                    <Input type="select" name="state" id="state" onChange={this.handleChange} >
                                         <option value="AL">Alabama</option>
                                         <option value="AK">Alaska</option>
                                         <option value="AZ">Arizona</option>
@@ -173,12 +172,12 @@ export default class EventCreate extends React.Component {
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for='zipcode'>Zipcode:</Label><br />
-                                    <Input type='text' name='zipcode' placeholder='enter zipcode' onChange={this.handleChange} />
+                                    <Input type='text' name='zipcode' placeholder='enter zipcode' onChange={this.handleChange} required/>
                                 </FormGroup>
                             </FormGroup>
                             <FormGroup>
                                 <Label for='message'>Post Message:</Label><br />
-                                <Input id='li_message' type='textarea' name='message' placeholder='Enter details of this event or meeting!' onChange={this.handleChange} />
+                                <Input id='li_message' type='textarea' name='message' placeholder='Enter details of this event or meeting!' onChange={this.handleChange} required/>
                             </FormGroup>
                             <FormGroup>
                                 <Label for='file'>Upload a Related Document PDF</Label>
