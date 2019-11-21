@@ -20,15 +20,28 @@
 .searchDocs {
     border-radius: 5px;
     margin: 0 20px;
-    background: rgb(185, 0, 0);
+    background: rgb(185, 0, 0, 0.7);
     padding: 10px;
     width: 200px;
-    height: 200px;
+    height: 180px;
 }
 
 .docAssortment {
     display: flex;
     width: 60vw;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.docWithinDays {
+    max-height: 500px;
+    overflow: auto;
+}
+
+.docWithinFlex {
+    border-bottom: 2px solid rgb(100, 133, 146);
+    border-radius: 5px;
+    display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
 }
@@ -43,9 +56,10 @@
     height: 200px;
     width: 200px;
     border-radius: 1px;
-    background: rgba(255, 239, 185);
+    background: rgb(250, 245, 222);
     padding: 10px 10px 0 10px;
-    border-bottom: 10px solid rgba(255, 239, 185);
+    border-bottom: 10px solid rgb(250, 245, 222);
+    border-radius: 2px;
     margin: 10px;
     display: flex;
     flex-direction: column;
@@ -56,7 +70,7 @@
 #docHover {
     visibility: hidden;
     width: 127px;
-    background-color: rgb(255,255,255,0.5);
+    background-color: rgb(255, 255, 255, 0.5);
     color: black;
     font-size: 8pt;
     text-align: center;
@@ -83,7 +97,7 @@
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: transparent rgb(255,255,255,0.5) transparent transparent;
+    border-color: transparent rgb(255, 255, 255, 0.5) transparent transparent;
 }
 
 .docSquare h4 {
@@ -148,8 +162,14 @@
         width: 100%;
     }
 }
-@media only screen and (max-width: 535px){
-    .docAssortment{
+
+@media only screen and (max-width: 535px) {
+    .docAssortment {
         justify-content: center;
     }
+    .docWithinFlex {
+        flex-direction: column;
+        align-items: center;
+    }
+
 }
