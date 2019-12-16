@@ -9,7 +9,7 @@ switch(window.location.hostname){
 
     //running on heroku
     //case is heroku url of client
-    case 'browntownship.herokuapp.com' :
+    case 'browntownship.org' :
     //set url to heroku server url
     APIURL = 'https://browntownshipserver.herokuapp.com'
 

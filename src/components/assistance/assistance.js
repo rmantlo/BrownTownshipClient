@@ -34,6 +34,7 @@ export default class Assistance extends React.Component {
                         </ul>
                     </ul>
                     <br />
+                    <hr />
                     <h3>Other Community Resources</h3>
                     <p>The downloads section has a PDF containing a list of more community resource options.</p>
                     <h5>Hendrick Country Resources</h5>
@@ -43,8 +44,8 @@ export default class Assistance extends React.Component {
                     <h5>Addiction and Mental Health Services</h5>
                     <p>Our Government has resource to help find and start treatment for addiction at <a href="https://findtreatment.gov/" target="_blank" rel="noopener noreferrer">findtreatment.gov</a>. The Willow Center is a local option for in person support, visit their site at <a href="https://thewillowcenter.com/" target="_blank" rel="noopener noreferrer">thewillowcenter.com</a>. The Hendrick County resource website as many other viable options at <a href="https://www.hendrickshealthpartnership.org/addiction-substance-misuse-and-recovery.html" target="_blank" rel="noopener noreferrer">hendrickshealthpartnership.org/addiction-substance-misuse-and-recovery</a>.</p>
                     <p>For support and resources covering mental health, Hendricks County resources can be found at <a href="https://www.hendrickshealthpartnership.org/mental-health-and-counseling.html" target="_blank" rel="noopener noreferrer">www.hendrickshealthpartnership.org/mental-health-and-counseling</a>. Meridian Health Group also has options and resources for mental health and addiction support, found at <a href="https://www.meridianhs.org/" target="_blank" rel="noopener noreferrer">meridianhs.org</a>.</p>
-                    <h5>Blessing Boxes</h5>
-                    <p>Brownsburg has a few different locations for Blessing Boxes. The downloads list has an attached PDF listing the locations. These boxes contain various foods and personal care items to help those who need it, with the mission to take what you need and give back when you can.</p>
+                    {/* <h5>Blessing Boxes</h5>
+                    <p>Brownsburg has a few different locations for Blessing Boxes. The downloads list has an attached PDF listing the locations. These boxes contain various foods and personal care items to help those who need it, with the mission to take what you need and give back when you can.</p> */}
                 </div>
                 <div>
                     <div>

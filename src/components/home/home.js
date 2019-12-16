@@ -29,26 +29,16 @@ export default class Home extends React.Component {
                     <div className="homeCard">
                         <h2>About Us</h2>
                         <hr />
-                        <p>Welcome to Brown Township - One of twelve in Hendricks County.</p>
-                        <p>Our current Township Trustee, Nathan Mantlo, took office on January 1st, 2019. A Township Trustee is an elected official for the local government. The Trustee acts as an administration for a township, and works with other board members in adopting annual budgets, managing finance and township contracts. A Trustee, in common with most other state officials, serves a term of four years.</p>
-                        <br />
-                        <h3>Contact Us</h3>
-                        <p><strong>Brown Township Office</strong></p>
-                        <p>7455 East County Road 1000 North</p>
-                        <p>Brownsburg, IN 46112</p>
-                        <p><strong>Phone number</strong></p>
-                        <p>(317) 852-0899</p>
-                        <p><strong>Hours</strong></p>
-                        <p>12PM-4PM Tuesdays and Thursdays</p>
-                        <p><strong>Email</strong></p>
-                        <p>browntownshipin@gmail.com</p>
+                        <p>Welcome to Brown Township, one of twelve in Hendricks County and is located in the north east portion of Hendricks county, bordered by Marion county to the east, Boone county to the north, Middle Township (Pittsboro and Lizton) to the west, and Lincoln Township to the south. Brown Township is largely rural except for southern 20% that is incorporated into the town of Brownsburg.</p>
+                        <p>Within the Township are 8 cemeteries: Ballard, Bethesda/Sambo, Evans, Johnson, Macedonia, Marvel, Smith-Shepherd and Sparks, as well as one park: The NorthWest Community Park.</p>
+                        <p>Our current Township Trustee, Nathan Mantlo, took office on January 1st, 2019. A Township Trustee is an elected official for the local government and is the executive for the township. A Trustee, in common with most other state officials, serves a term of four years.</p>
+                        {/* <p>Under our new trustee's leadership, beginning in 2020, Brown Township land owner's property tax will eliminated.</p> */}
                     </div>
                     <div className="homeCard">
                         <h2>Township Assistance</h2>
                         <hr />
-                        <p>This site was created as a way for people to get up to date township information and access to reliable Township and Community Assistance information.</p>
-                        <p>Nagivate to our township assistance page from the navigation bar above, or click <a href="/assistance">here</a>.</p>
-                        <br />
+                        <p>This site provides up to date township information and access to Township and Community Assistance information.</p>
+                        <p>Township assistance page is located on the navigation bar above, or click <a href="/assistance">here</a>.</p>
                         <br />
                         <div>
                             {(this.state.data) ?
@@ -57,23 +47,27 @@ export default class Home extends React.Component {
                                     <Card >
                                         <EventDetails data={this.state.data} />
                                     </Card>
-                                </div> : null
+                                </div> : <Card><p>No Upcoming Events</p></Card>
                             }
                         </div>
                     </div>
                     <div className="homeCard trusteeInfo">
-                        <h2>Fire Territory</h2>
+                        <h2>Contact Us</h2>
                         <hr />
-                        <p><strong>Fire Chief</strong></p>
-                        <p>Larry Alcorn</p>
-                        <p><strong>Brownburg Fire Territory Headquarters & Training Facility</strong></p>
-                        <p>470 East Northfield Drive</p>
+                        <p><strong>Brown Township Office</strong></p>
+                        <p>7455 East County Road 1000 North</p>
                         <p>Brownsburg, IN 46112</p>
-                        <p><strong>Phone Number</strong></p>
-                        <p>(317) 852-1190</p>
+                        <p><strong>Phone number</strong></p>
+                        <p>(317) 852-0899</p>
                         <p><strong>Hours</strong></p>
-                        <p>8:00AM-4:30PM Monday-Friday</p>
-                        <p><a href="http://www.brownsburgfire.org/">http://www.brownsburgfire.org/</a></p>
+                        <p>12PM-4PM Tuesdays and Thursdays</p>
+                        <p>Closed Holidays</p>
+                        <p><strong>Email</strong></p>
+                        <p>browntownshipin@gmail.com</p>
+                        <br />
+                        <h3>Township Fire Protection </h3>
+                        <p>Provided for by a entity created between Brown Township, Lincoln Township and the town of Brownsburg. Fire stations #132 and #133 are located in our township. The trustee office is located in fire station #132.</p>
+                        <p><a href="http://www.brownsburgfire.org/">www.brownsburgfire.org</a></p>
                     </div>
                 </section>
             </div>
