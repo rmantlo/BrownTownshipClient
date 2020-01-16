@@ -39,22 +39,22 @@ export default class Events extends React.Component {
                     tbdEvents: [],
                     others: []
                 };
+                console.log(new Date().getDate())
                 resTwo.forEach(a => {
                     if (a.dateOfEvent == null) {
                         events.tbdEvents.push(a);
                     }
-                    else if (a.dateOfEvent >= new Date()) {
+                    else if (new Date(a.dateOfEvent).getDate() >= new Date().getDate()) {
                         events.futureEvents.push(a);
                     }
-                    else if (a.dateOfEvent < new Date()) {
+                    else if (new Date(a.dateOfEvent).getDate() < new Date().getDate()) {
                         events.pastEvents.push(a)
                     }
                     else {
                         events.others.push(a)
-                        //console.log(new Date())
                     }
                 });
-                //this.setState({ data: resTwo });
+                this.setState({ data: events });
             })
     }
     toggle(tab) {

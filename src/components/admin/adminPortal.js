@@ -53,9 +53,29 @@ export default class AdminPortal extends React.Component {
         })
             .then(response => response.json())
             .then(data => {
-                this.setState({
-                    events: data,
+                let events = {
+                    pastEvents: [],
+                    futureEvents: [],
+                    tbdEvents: [],
+                    others: []
+                };
+                console.log(new Date().getDate())
+                data.forEach(a => {
+                    if (a.dateOfEvent == null) {
+                        events.tbdEvents.push(a);
+                    }
+                    else if (new Date(a.dateOfEvent).getDate() >= new Date().getDate()) {
+                        events.futureEvents.push(a);
+                    }
+                    else if (new Date(a.dateOfEvent).getDate() < new Date().getDate()) {
+                        events.pastEvents.push(a)
+                    }
+                    else {
+                        events.others.push(a)
+                    }
                 });
+
+                this.setState({events: events});
             })
             .catch(err => console.log(err));
     }
