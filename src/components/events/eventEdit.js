@@ -7,7 +7,7 @@ import moment from 'moment';
 import PDFViewer from '../pdfviewer/PDFViewer';
 
 export default class EventEdit extends React.Component {
-    state = this.props.data
+    state = this.props.data;
     format = 'h:mm a';
     now = moment().hour(parseInt((this.state.timeOfEvent).substring(0, 2))).minute(parseInt((this.state.timeOfEvent).substring(3, 5)));
 
@@ -22,19 +22,67 @@ export default class EventEdit extends React.Component {
         console.log(this.state)
     }
     handleSubmit = (e) => {
-        fetch(`${APIURL}/admin/editevent/${e.target.id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token')
-            },
-            body: JSON.stringify(this.state)
-        })
-            .then()
+        let element = document.getElementById('eventeditupload');
+        if (element.files.length > 0) {
+            let doc = element.files[0];
+            if (doc.type !== 'application/pdf') { alert('File upload must be a PDF!') }
+            let result = '';
+            console.log(doc);
+            let blob = new Blob([doc], { type: "application/pdf" });
+            const reader = new FileReader();
+            reader.readAsDataURL(blob)
+            reader.onloadend = (e) => {
+                result = reader.result;
+                fetch(`${APIURL}/admin/editevent/${this.state.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': localStorage.getItem('token')
+                    },
+                    body: JSON.stringify({
+                        title: this.state.title,
+                        message: this.state.forumMessage,
+                        dateOfEvent: this.state.dateOfEvent,
+                        timeOfEvent: this.state.timeOfEvent,
+                        type: this.state.type,
+                        streetAddress: this.state.streetAddress,
+                        city: this.state.city,
+                        state: this.state.state,
+                        zipcode: this.state.zipcode,
+                        fileBinary: result,
+                        fileType: doc.type
+                    })
+                })
+                    .then()
+            }
+        }
+        else {
+            fetch(`${APIURL}/admin/editevent/${this.state.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.getItem('token')
+                },
+                body: JSON.stringify({
+                    title: this.state.title,
+                    forumMessage: this.state.forumMessage,
+                    dateOfEvent: this.state.dateOfEvent,
+                    timeOfEvent: this.state.timeOfEvent,
+                    type: this.state.type,
+                    streetAddress: this.state.streetAddress,
+                    city: this.state.city,
+                    state: this.state.state,
+                    zipcode: this.state.zipcode,
+                    fileBinary: this.state.fileBinary,
+                    fileType: 'No File'
+                })
+            })
+                .then()
+        }
     }
     clearDocument = (e) => {
         e.preventDefault();
-        this.setState({fileBinary: null});
+        this.setState({ fileBinary: null });
     }
     render() {
         return (
@@ -73,7 +121,7 @@ export default class EventEdit extends React.Component {
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for='city'>City: </Label><br />
-                                    <Input id='li_city' type='text' name='city' value={this.state.city} onChange={this.handleChange} required/>
+                                    <Input id='li_city' type='text' name='city' value={this.state.city} onChange={this.handleChange} required />
                                 </FormGroup>
                             </FormGroup>
                             <FormGroup id='eventLocation'>
@@ -135,12 +183,12 @@ export default class EventEdit extends React.Component {
                                 </FormGroup>
                                 <FormGroup>
                                     <Label for='zipcode'>Zipcode:</Label><br />
-                                    <Input type='text' name='zipcode' value={this.state.zipcode} onChange={this.handleChange} required/>
+                                    <Input type='text' name='zipcode' value={this.state.zipcode} onChange={this.handleChange} required />
                                 </FormGroup>
                             </FormGroup>
                             <FormGroup>
                                 <Label for='message'>Post Message:</Label><br />
-                                <Input id='li_message' type='textarea' name='forumMessage' value={this.state.forumMessage} onChange={this.handleChange} required/>
+                                <Input id='li_message' type='textarea' name='forumMessage' value={this.state.forumMessage} onChange={this.handleChange} required />
                             </FormGroup>
                             <FormGroup>
                                 <Label for='file'>Upload a Related Document PDF</Label>
@@ -149,7 +197,7 @@ export default class EventEdit extends React.Component {
                                         <PDFViewer data={this.state.fileBinary} />
                                         <Button color='danger' onClick={this.clearDocument}>Remove Document</Button>
                                     </div>
-                                    : <Input type='file' name='file' id='eventupload' onChange={this.handleChange} />
+                                    : <Input type='file' name='file' id='eventeditupload' onChange={this.handleChange} />
                                 }
                             </FormGroup>
                             <Button color='danger' type='submit' id={this.state.id}>Update</Button>

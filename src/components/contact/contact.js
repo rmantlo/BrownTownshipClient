@@ -16,7 +16,11 @@ export default class Contact extends React.Component {
                     <p>Having lived in Brownsburg for over 15 years, Nathan decided he wanted to give back to our community. He took office on January 1st, 2019.</p>
                     <br />
                     <br />
-                    <h5>Board Members</h5>
+                    <h5>Township Assistance Investigator</h5>
+                    <h4>Jamie Sharkitt</h4>
+                    <br />
+                    <br />
+                    <h5>Advisory Board Members</h5>
                     <h4>Dottie McIntyre - Chair Person</h4>
                     <p>Member about</p>
                     <br />
@@ -25,10 +29,6 @@ export default class Contact extends React.Component {
                     <br />
                     <h4>Tom Kmetz</h4>
                     <p>Member about</p>
-                    <br />
-                    <br />
-                    <h5>Township Assistance Investigator</h5>
-                    <h4>Jamie Sharkitt</h4>
                 </div>
                 <div className='divider'></div>
                 <div className='contactForm'>

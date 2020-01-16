@@ -68,8 +68,8 @@ export default class AdminPortal extends React.Component {
             }
         })
             .then(info => info.json())
-            .then(info => {
-                this.setState({ user: info });
+            .then(infoTwo => {
+                this.setState({ user: infoTwo });
             })
             .catch(err => console.log(err));
     }

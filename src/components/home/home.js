@@ -14,8 +14,8 @@ export default class Home extends React.Component {
             }
         })
             .then(info => info.json())
-            .then(info => {
-                this.setState({ data: info })
+            .then(infoTwo => {
+                this.setState({ data: infoTwo })
             })
     }
     render() {
@@ -30,7 +30,7 @@ export default class Home extends React.Component {
                         <h2>About Us</h2>
                         <hr />
                         <p>Welcome to Brown Township, one of twelve in Hendricks County and is located in the north east portion of Hendricks county, bordered by Marion county to the east, Boone county to the north, Middle Township (Pittsboro and Lizton) to the west, and Lincoln Township to the south. Brown Township is largely rural except for southern 20% that is incorporated into the town of Brownsburg.</p>
-                        <p>Within the Township are 8 cemeteries: Ballard, Bethesda/Sambo, Evans, Johnson, Macedonia, Marvel, Smith-Shepherd and Sparks, as well as one park: The NorthWest Community Park.</p>
+                        <p>Cemeteries within the Township are: Ballard, Bethesda/Sambo, Evans, Johnson, Macedonia, Marvel, Smith-Shepherd and Sparks, as well as one park: The NorthWest Community Park.</p>
                         <p>Our current Township Trustee, Nathan Mantlo, took office on January 1st, 2019. A Township Trustee is an elected official for the local government and is the executive for the township. A Trustee, in common with most other state officials, serves a term of four years.</p>
                         {/* <p>Under our new trustee's leadership, beginning in 2020, Brown Township land owner's property tax will eliminated.</p> */}
                     </div>

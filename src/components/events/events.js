@@ -32,8 +32,29 @@ export default class Events extends React.Component {
             }
         })
             .then(res => res.json())
-            .then(res => {
-                this.setState({ data: res });
+            .then(resTwo => {
+                let events = {
+                    pastEvents: [],
+                    futureEvents: [],
+                    tbdEvents: [],
+                    others: []
+                };
+                resTwo.forEach(a => {
+                    if (a.dateOfEvent == null) {
+                        events.tbdEvents.push(a);
+                    }
+                    else if (a.dateOfEvent >= new Date()) {
+                        events.futureEvents.push(a);
+                    }
+                    else if (a.dateOfEvent < new Date()) {
+                        events.pastEvents.push(a)
+                    }
+                    else {
+                        events.others.push(a)
+                        //console.log(new Date())
+                    }
+                });
+                //this.setState({ data: resTwo });
             })
     }
     toggle(tab) {
@@ -61,7 +82,7 @@ export default class Events extends React.Component {
                 "Content-Type": 'application/json'
             }
         })
-        .then(res => window.location.reload())
+            .then(res => window.location.reload())
     }
     render() {
         return (
