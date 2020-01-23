@@ -20,6 +20,8 @@ export default class EventCreate extends React.Component {
         this.setState({ time: e.format(this.format) });
     }
     handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(this.state)
         let element = document.getElementById('eventupload');
         if (element.files.length > 0) {
             let doc = element.files[0];
@@ -39,19 +41,19 @@ export default class EventCreate extends React.Component {
                     },
                     body: JSON.stringify({
                         title: this.state.title,
-                        message: this.state.message,
-                        date: this.state.date,
-                        time: this.state.time,
+                        forumMessage: this.state.message,
+                        dateOfEvent: this.state.date,
+                        timeOfEvent: this.state.time,
                         type: this.state.type,
-                        location: this.state.location,
+                        streetAddress: this.state.location,
                         city: this.state.city,
                         state: this.state.state,
                         zipcode: this.state.zipcode,
-                        data: result,
+                        fileBinary: result,
                         fileType: doc.type
                     })
                 })
-                    .then()
+                    .then(re => window.location.reload(false))
             }
         }
         else {
@@ -63,19 +65,19 @@ export default class EventCreate extends React.Component {
                 },
                 body: JSON.stringify({
                     title: this.state.title,
-                    message: this.state.message,
-                    date: this.state.date,
-                    time: this.state.time,
+                    forumMessage: this.state.message,
+                    dateOfEvent: this.state.date,
+                    timeOfEvent: this.state.time,
                     type: this.state.type,
-                    location: this.state.location,
+                    streetAddress: this.state.location,
                     city: this.state.city,
                     state: this.state.state,
                     zipcode: this.state.zipcode,
-                    data: null,
+                    fileBinary: null,
                     fileType: "No file"
                 })
             })
-                .then()
+                .then(re => window.location.reload(false))
         }
     }
 
