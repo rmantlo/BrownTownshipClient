@@ -59,15 +59,14 @@ export default class AdminPortal extends React.Component {
                     tbdEvents: [],
                     others: []
                 };
-                console.log(new Date().getDate())
                 data.forEach(a => {
                     if (a.dateOfEvent == null) {
                         events.tbdEvents.push(a);
                     }
-                    else if (new Date(a.dateOfEvent).getDate() >= new Date().getDate()) {
+                    else if (new Date(a.dateOfEvent) >= new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())) {
                         events.futureEvents.push(a);
                     }
-                    else if (new Date(a.dateOfEvent).getDate() < new Date().getDate()) {
+                    else if (new Date(a.dateOfEvent) < new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())) {
                         events.pastEvents.push(a)
                     }
                     else {
