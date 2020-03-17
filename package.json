@@ -8,11 +8,11 @@
     "classnames": "^2.2.6",
     "moment": "^2.24.0",
     "rc-time-picker": "^3.7.3",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.1.1",
-    "reactstrap": "^8.3.1"
+    "reactstrap": "^8.4.1"
   },
   "scripts": {
     "start": "react-scripts start",

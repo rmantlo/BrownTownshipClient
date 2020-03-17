@@ -17,7 +17,8 @@ export default class Events extends React.Component {
             futureEvents: [],
             pastEvents: [],
             tbdEvents: []
-        }
+        },
+        jsEnabled: true
     }
     constructor(props) {
         super(props);
@@ -32,7 +33,18 @@ export default class Events extends React.Component {
                 'Accept': 'application/json'
             }
         })
-            .then(res => {console.log(res); return res.json(); })
+            .then(res => {
+                //console.log(res);
+                //console.log(Array.from(res.headers.values()).toString())
+                let head = Array.from(res.headers.values()).toString();
+                if (head.includes("application/json")) {
+                    return res.json();
+                }
+                else {
+                    console.log('Your browser does not have JavaScript enabled');
+                    this.setState({ jsEnabled: false });
+                }
+            })
             .then(resTwo => {
                 console.log(resTwo);
                 let events = {
@@ -41,21 +53,23 @@ export default class Events extends React.Component {
                     tbdEvents: [],
                     others: []
                 };
-                resTwo.forEach(a => {
-                    if (a.dateOfEvent == null) {
-                        events.tbdEvents.push(a);
-                    }
-                    else if (new Date(a.dateOfEvent) >= new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())) {
-                        events.futureEvents.push(a);
-                    }
-                    else if (new Date(a.dateOfEvent) < new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())) {
-                        events.pastEvents.push(a)
-                    }
-                    else {
-                        events.others.push(a)
-                    }
-                });
-                //this.setState({ token: localStorage.getItem('token'), data: events });
+                if (resTwo) {
+                    resTwo.forEach(a => {
+                        if (a.dateOfEvent == null) {
+                            events.tbdEvents.push(a);
+                        }
+                        else if (new Date(a.dateOfEvent) >= new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())) {
+                            events.futureEvents.push(a);
+                        }
+                        else if (new Date(a.dateOfEvent) < new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())) {
+                            events.pastEvents.push(a)
+                        }
+                        else {
+                            events.others.push(a)
+                        }
+                    });
+                    this.setState({ token: localStorage.getItem('token'), data: events });
+                }
             })
     }
     toggle(tab) {
@@ -134,9 +148,11 @@ export default class Events extends React.Component {
                                                     }
                                                 </Card>)
                                         }))
-                                        : <div className='myCard noEvents'>
+                                        : ((this.state.jsEnabled) ? <div className='myCard noEvents'>
                                             <h3>No events coming up!</h3>
-                                        </div>
+                                        </div> : <div className='myCard noEvents'>
+                                                <h3>JavaScript is not Enabled on your Browser.</h3>
+                                            </div>)
                                     }
                                 </div>
                             </Col>
@@ -159,9 +175,11 @@ export default class Events extends React.Component {
                                                     }
                                                 </Card>)
                                         }))
-                                        : <div className='myCard noEvents'>
-                                            <h3>No events from the past!</h3>
-                                        </div>
+                                        : ((this.state.jsEnabled) ? <div className='myCard noEvents'>
+                                            <h3>No events coming up!</h3>
+                                        </div> : <div className='myCard noEvents'>
+                                                <h3>JavaScript is not Enabled on your Browser.</h3>
+                                            </div>)
                                     }
                                 </div>
                             </Col>

@@ -14,7 +14,8 @@ export default class Documents extends React.Component {
         detailDataId: null,
         typeSearch: '',
         dateSearch: '',
-        extraDataView: false
+        extraDataView: false,
+        jsEnabled: true
     }
 
     componentDidMount() {
@@ -28,9 +29,19 @@ export default class Documents extends React.Component {
                 "Content-Type": 'application/json'
             }
         })
-            .then(response => response.json())
+            .then(response => {
+                //response.json()
+                let head = Array.from(response.headers.values()).toString();
+                if (head.includes("application/json")) {
+                    return response.json();
+                }
+                else {
+                    console.log('Your browser does not have JavaScript enabled');
+                    this.setState({ jsEnabled: false });
+                }
+            })
             .then(data => {
-                if (data != null) {
+                if (data) {
                     this.setState({
                         data: data
                     });
@@ -91,7 +102,17 @@ export default class Documents extends React.Component {
                 "Content-Type": "application/json"
             }
         })
-            .then(res => res.json())
+            .then(res => {
+                //res.json()
+                let head = Array.from(res.headers.values()).toString();
+                if (head.includes("application/json")) {
+                    return res.json();
+                }
+                else {
+                    console.log('Your browser does not have JavaScript enabled');
+                    this.setState({ jsEnabled: false });
+                }
+            })
             .then(search => {
                 if (search != null) {
                     this.setState({ data: search, bufferData: [] })
@@ -108,9 +129,19 @@ export default class Documents extends React.Component {
                 "Content-Type": "application/json"
             }
         })
-            .then(res => res.json())
+            .then(res => {
+                //res.json()
+                let head = Array.from(res.headers.values()).toString();
+                if (head.includes("application/json")) {
+                    return res.json();
+                }
+                else {
+                    console.log('Your browser does not have JavaScript enabled');
+                    this.setState({ jsEnabled: false });
+                }
+            })
             .then(search => {
-                if (search != null) {
+                if (search) {
                     this.setState({
                         data: search.docsBeforeDate,
                         bufferData: search.docsAfterDate
@@ -179,7 +210,9 @@ export default class Documents extends React.Component {
                                             <div id="docHover">Click to see full document.</div>
                                         </div>)
                                 }))
-                                    : <div className='noDocuments'><h3>No Documents Found</h3></div>}
+                                    : ((this.state.jsEnabled) ? <div className='noDocuments'><h3>No Documents Found</h3></div>
+                                        : <div className='noDocuments'><h3>JavaScript is not Enabled on your Browser.</h3></div>)
+                                }
                             </div>
                         </div>
                     </div>
