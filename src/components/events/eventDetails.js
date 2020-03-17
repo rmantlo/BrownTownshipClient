@@ -35,7 +35,7 @@ export default class EventDetails extends React.Component {
             <CardBody>
                 <p id='eventType'>{this.state.type}</p>
                 <h2>{this.state.title}</h2>
-                <p className='eventDateTime'>{timeValue} {this.state.dateOfEvent}</p>
+                {/* <p className='eventDateTime'>{timeValue} {this.state.dateOfEvent}</p> */}
                 <p className='eventDateTime'>Location: {this.state.streetAddress}, {this.state.city}, {this.state.state} {this.state.zipcode}</p>
                 <CardText className='message' >{this.state.forumMessage}</CardText>
                 {(this.state.fileBinary != null)? 

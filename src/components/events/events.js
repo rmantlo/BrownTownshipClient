@@ -24,15 +24,17 @@ export default class Events extends React.Component {
         this.toggle = this.toggle.bind(this);
     }
     componentDidMount() {
-        this.setState({ token: localStorage.getItem('token') })
+        //this.setState({ token: localStorage.getItem('token') })
         fetch(`${APIURL}/posts/alleventposts`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             }
         })
-            .then(res => res.json())
+            .then(res => {console.log(res); return res.json(); })
             .then(resTwo => {
+                console.log(resTwo);
                 let events = {
                     pastEvents: [],
                     futureEvents: [],
@@ -53,7 +55,7 @@ export default class Events extends React.Component {
                         events.others.push(a)
                     }
                 });
-                this.setState({ data: events });
+                //this.setState({ token: localStorage.getItem('token'), data: events });
             })
     }
     toggle(tab) {
