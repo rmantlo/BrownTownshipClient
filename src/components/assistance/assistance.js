@@ -2,7 +2,7 @@ import React from 'react';
 import './assistance.css';
 import TA1Form from  '../../assets/files/TownshipAssistanceApplication.pdf';
 import TA1BForm from '../../assets/files/ContinuingTownshipAssistanceForm-TA-1B.pdf';
-import Guidelines from '../../assets/files/2019FEDpovertyguidelines.pdf';
+import Guidelines from '../../assets/files/2020PovertyGuidelines.pdf';
 //import ImportantDocs from '../../assets/files/Applicationlistofdocuments.pdf';
 import Trustees from '../../assets/files/2019HendricksCountyTrustees.pdf';
 import Blessings from '../../assets/files/BrownsburgBlessingBoxLocations.pdf';
@@ -53,9 +53,9 @@ export default class Assistance extends React.Component {
                         <h4>Downloads</h4>
                         <h5>Township Assistance Documents</h5>
                         <ul>
-                            <li><a href={TA1Form} download alt='Township Assistance TA-1 Form PDF'>Township assistance TA-1 Form</a></li>
-                            <li><a href={TA1BForm} download alt='Continuing Township Assistance TA-1B Form PDF'>Continuing Township assistance TA-1B Form</a></li>
-                            <li><a href={Guidelines} download alt="Poverty Guidelines 2019 PDF" >Poverty Guidelines 2019</a></li>
+                            <li><a href={TA1Form} download alt='Township Assistance TA-1 Form'>Township Assistance TA-1 Form</a></li>
+                            <li><a href={TA1BForm} download alt='Continuing Township Assistance TA-1B Form'>Continuing Township Assistance TA-1B Form</a></li>
+                            <li><a href={Guidelines} download alt="Poverty Guidelines" >Poverty Guidelines</a></li>
                             {/* <li><a href={ImportantDocs} download alt="List Of Important Documents PDF">List Of Important Documents</a></li> */}
                         </ul>
                         <h5>Other Documents</h5>
