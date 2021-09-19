@@ -39,6 +39,8 @@ export default class Contact extends React.Component {
                         <p>Brownsburg, IN 46112</p>
                         <p><strong>Phone number</strong></p>
                         <p>(317) 852-0899</p>
+                        <p>(317) 745-9255</p>
+                        <p>(317) 374-4903</p>
                         <p><strong>Hours</strong></p>
                         <p>12PM-4PM Tuesdays and Thursdays</p>
                         <p><strong>Email</strong></p>

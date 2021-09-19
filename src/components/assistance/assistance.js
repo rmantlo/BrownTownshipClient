@@ -2,7 +2,7 @@ import React from 'react';
 import './assistance.css';
 import TA1Form from  '../../assets/files/TownshipAssistanceApplication.pdf';
 import TA1BForm from '../../assets/files/ContinuingTownshipAssistanceForm-TA-1B.pdf';
-import Guidelines from '../../assets/files/2020PovertyGuidelines.pdf';
+import Guidelines from '../../assets/files/2021-percentage-poverty-tool48States.pdf';
 //import ImportantDocs from '../../assets/files/Applicationlistofdocuments.pdf';
 import Trustees from '../../assets/files/2019HendricksCountyTrustees.pdf';
 import Blessings from '../../assets/files/BrownsburgBlessingBoxLocations.pdf';

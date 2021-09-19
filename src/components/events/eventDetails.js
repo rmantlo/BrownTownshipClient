@@ -12,7 +12,9 @@ export default class EventDetails extends React.Component {
 
     render() {
         var timeValue;
-        if (this.state.dateOfEvent !== null && this.state.timeOfEvent !== null) {
+        if (this.state.dateOfEvent !== null && this.state.timeOfEvent !== null &&
+            this.state.dateOfEvent !== undefined && this.state.timeOfEvent !== undefined
+            ) {
             let time = (this.state.timeOfEvent.substring(0, 5)).split(':');
             var hours = Number(time[0]);
             var minutes = Number(time[1]);
