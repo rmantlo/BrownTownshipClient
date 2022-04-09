@@ -6,7 +6,7 @@
   "dependencies": {
     "bootstrap": "^4.4.1",
     "classnames": "^2.2.6",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "rc-time-picker": "^3.7.3",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
